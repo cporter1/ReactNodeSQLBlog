@@ -4,7 +4,10 @@
   "description": "Thiem-Porter project",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,9 @@
   },
   "homepage": "https://github.com/cporter1/node-sql-TP-1.0#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "react": "^16.13.1",
+    "react-scripts": "^3.4.3",
+    "reactstrap": "^8.6.0"
   }
 }
