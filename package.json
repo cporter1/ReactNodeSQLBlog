@@ -1,0 +1,19 @@
+{
+  "name": "sql-tp",
+  "version": "1.0.0",
+  "description": "Thiem-Porter project",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cporter1/node-sql-TP-1.0.git"
+  },
+  "author": "Eric Thiem, Colin Porter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cporter1/node-sql-TP-1.0/issues"
+  },
+  "homepage": "https://github.com/cporter1/node-sql-TP-1.0#readme"
+}
