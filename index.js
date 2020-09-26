@@ -15,19 +15,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 // response to: URL/ . Renders home view with index layout
 app.get('/', (req, res) => {
 	
-	res.render('home' , {layout: 'index'});
-});
-
-// response to: URL/portfolio . Renders portfolio view with index layout
-app.get('/portfolio', (req, res) => {
-	
-	res.render('portfolio' , {layout: 'index'});
-});
-
-// response to: URL/contact . Renders contact view with index layout
-app.get('/contact', (req, res) => {
-	
-	res.render('contact' , {layout: 'index'});
+	res.send('helllo');
 });
 
 //app listens on port variable

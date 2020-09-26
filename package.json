@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cporter1/node-sql-TP-1.0/issues"
   },
-  "homepage": "https://github.com/cporter1/node-sql-TP-1.0#readme"
+  "homepage": "https://github.com/cporter1/node-sql-TP-1.0#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
