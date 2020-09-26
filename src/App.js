@@ -4,7 +4,11 @@ import SignIn from "./Pages/SignIn";
 
 function App() {
   return (
-    <SignIn/>
+    <div className = "App">
+      <header className="App-header">
+        <SignIn/>
+      </header>
+    </div>
   );
 }
 
