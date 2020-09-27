@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Input, Label, Button} from 'reactstrap';
+import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button} from 'reactstrap';
 //import "./SignIn.css";
 
 class SignIn extends Component {
@@ -8,21 +8,37 @@ class SignIn extends Component {
     console.log(ev.target.email.value);
     console.log(ev.target.email.value);
     console.log(ev.target.email.value);
+
   };
 
   render(){
 
     return(
       <div className='center'>
+
+        <Label>Welcome!</Label>
+
         <Form onSubmit={this.onSubmit}>
-          <Label>Email: </Label>
-          <Input id='email' type='text' style={{border: '2px solid #000000'}}/>
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>Email</InputGroupText>
+            </InputGroupAddon>
+            <Input id="email" type='text' placeholder="Email" />
+          </InputGroup>
           <div style={{height: '0.4em'}}/>
-          <Label>Username: </Label>
-          <Input id='username' type='text' style={{border: '2px solid #000000'}}/>
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>Username</InputGroupText>
+            </InputGroupAddon>
+            <Input id="email" type='text' placeholder="Username" />
+          </InputGroup>
           <div style={{height: '0.4em'}}/>
-          <Label>Password: </Label>
-          <Input id='password' type='password' style={{border: '2px solid #000000'}}/>
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>Password</InputGroupText>
+            </InputGroupAddon>
+            <Input id="password" type="password" placeholder="Password" />
+          </InputGroup>
           <div style={{height: '0.4em'}}/>
           <Button>Create Account</Button>
         </Form>

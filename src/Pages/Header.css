@@ -1,0 +1,11 @@
+.left {
+    flex: 1;
+    flexDirection: row;
+    justifyContent: 'flex-start';
+}
+
+.right {
+    flex: 1;
+    flexDirection: row;
+    justifyContent: 'flex-end';
+}
