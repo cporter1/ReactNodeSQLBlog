@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-
-import {Navbar, NavbarBrand, NavLink, NavItem, Nav} from 'reactstrap';
-import {View} from 'react-native';
+import {Navbar, NavbarBrand, NavItem, Nav, NavLink} from 'reactstrap';
 import "./Header.css";
 
 class Header extends Component {
@@ -10,22 +8,18 @@ class Header extends Component {
 
   render() {
     return (
-      <View>
-
       <Navbar color="light" light expand="md">
-        <View className='left'>
-          <NavbarBrand><h1>Thiem Porter</h1></NavbarBrand>
-        </View>
-        <Nav navbar>
+        <NavbarBrand><h1>Thiem Porter</h1></NavbarBrand>
+        <Nav className='ml-auto' navbar>
           <NavItem>
-            <NavLink>
+            <NavLink href="/create-account">
               <h4>
                 Create Account
               </h4>
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink>
+            <NavLink href="/sign-in">
               <h4>
                 Sign In
               </h4>
@@ -33,7 +27,6 @@ class Header extends Component {
           </NavItem>
         </Nav>
       </Navbar>
-      </View>
     );
   }
 
