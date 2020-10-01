@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button} from 'reactstrap';
-import createProxyMiddleware from 'http-proxy-middleware';
-//import "./CreateAccount.css";
 
 class SignIn extends Component {
 

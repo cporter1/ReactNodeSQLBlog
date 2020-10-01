@@ -5,7 +5,7 @@ const app = express(); // create express app
 app.use(cors());
 
 app.get("/api/hey", (req, res) => {
-  res.send("This is the Sign In Page");
+  res.send("Hello from the Node.js server!");
 });
 
 // start express server on port 5000
