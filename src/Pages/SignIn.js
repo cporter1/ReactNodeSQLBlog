@@ -1,14 +1,32 @@
 import React, {Component} from 'react';
 import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button} from 'reactstrap';
+import createProxyMiddleware from 'http-proxy-middleware';
 //import "./CreateAccount.css";
 
 class SignIn extends Component {
 
-  onSubmit = (ev) => {
-    console.log(ev.target.email.value);
-    console.log(ev.target.email.value);
-    console.log(ev.target.email.value);
+  constructor(props){
+    super(props);
 
+    this.state = {};
+  }
+
+  componentDidMount() {
+    this.callBackendAPI();
+  }
+
+  onSubmit = (ev) => {
+    /*ev.preventDefault();
+    fetch(`/api/greeting?name=${encodeURIComponent(this.state.name)}`)
+      .then(response => response.json())
+      .then(state => this.setState(state));*/
+  };
+
+
+  callBackendAPI = async () => {
+    fetch(`http://localhost:3001/api/hey`)
+      .then(response => response.text())
+      .then(response => this.setState({data: response}));
   };
 
   render(){
@@ -16,7 +34,7 @@ class SignIn extends Component {
     return(
       <div className='center'>
 
-        <Label>Sign In!</Label>
+        <Label>{this.state.data}</Label>
 
         <Form onSubmit={this.onSubmit}>
           <InputGroup>
