@@ -25,6 +25,10 @@ class SignIn extends Component {
     fetch(`http://localhost:3001/api/hey`)
       .then(response => response.text())
       .then(response => this.setState({data: response}));
+
+    fetch(`http://localhost:3001/sql`)
+      .then(response => response.text())
+      .then(response => this.setState({sql: response}));
   };
 
   render(){
@@ -32,7 +36,7 @@ class SignIn extends Component {
     return(
       <div className='center'>
 
-        <Label>{this.state.data}</Label>
+        <Label>{this.state.sql}</Label>
 
         <Form onSubmit={this.onSubmit}>
           <InputGroup>
