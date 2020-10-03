@@ -33,6 +33,30 @@ app.get('/sql', function (req, res) {
     });
   });
 });
+
+app.post("/new-account", function (req, res) {
+  sql.connect(config, function (err) {
+
+    console.log(req);
+
+    if (err) console.log(err);
+
+    // create Request object
+    let request = new sql.Request();
+
+    // query to the database and get the records
+    request.query('INSERT INTO Accounts VALUES ('Eric', 'ericthiem23@gmail.com', 'pass')', function (err, response) {
+
+      if (err) console.log(err);
+
+      // send records as a response
+      res.send(response);
+
+    });
+  });
+});
+
+
   
 app.get("/", (req, res) => {
   res.send("homepage");
