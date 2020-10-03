@@ -22,11 +22,11 @@ class SignIn extends Component {
 
 
   callBackendAPI = async () => {
-    fetch(`http://localhost:3001/api/hey`)
+    fetch(`http://10.0.0.97:3001/api/hey`)
       .then(response => response.text())
       .then(response => this.setState({data: response}));
 
-    fetch(`http://localhost:3001/sql`)
+    fetch(`http://10.0.0.97:3001/sql`)
       .then(response => response.text())
       .then(response => this.setState({sql: response}));
   };
