@@ -36,6 +36,10 @@ app.get('/sql', function (req, res) {
 
 app.get("/api/sql", (req, res) => {
   res.send("This should be from the server");
+});	
+  
+app.get("/", (req, res) => {
+  res.send("homepage");
 });
 
 app.get("/api/hey", (req, res) => {
