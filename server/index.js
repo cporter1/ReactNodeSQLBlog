@@ -1,7 +1,10 @@
 const express = require("express");
 const cors = require('cors');
+const sql = require('mssql');
+const bodyParser = require('body-parser');
+
 const app = express(); // create express app
-const sql = require('mssql')
+app.use(bodyParser.json());
 
 let config = {
   user: 'Eric',
@@ -29,6 +32,29 @@ app.get('/sql', function (req, res) {
 
       // send records as a response
       res.send(recordset.recordset);
+
+    });
+  });
+});
+
+app.post("/new-account", function (req, res) {
+  sql.connect(config, function (err) {
+    console.log(req.body.email);
+
+    if (err) console.log(err);
+
+    // create Request object
+    let request = new sql.Request();
+    let query = `INSERT INTO Accounts VALUES ('${req.body.email}', '${req.body.username}', '${req.body.password}')`;
+    console.log("QUERY: " + query);
+
+    // query to the database and get the records
+    request.query(query, function (err, response) {
+
+      if (err) console.log(err);
+
+      // send records as a response
+      res.send(response);
 
     });
   });
