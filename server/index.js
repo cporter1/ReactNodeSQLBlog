@@ -39,14 +39,12 @@ app.get('/sql', function (req, res) {
 
 app.post("/new-account", function (req, res) {
   sql.connect(config, function (err) {
-    console.log(req.body.email);
 
     if (err) console.log(err);
 
     // create Request object
     let request = new sql.Request();
     let query = `INSERT INTO Accounts VALUES ('${req.body.email}', '${req.body.username}', '${req.body.password}')`;
-    console.log("QUERY: " + query);
 
     // query to the database and get the records
     request.query(query, function (err, response) {

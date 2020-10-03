@@ -7,6 +7,7 @@ class CreateAccount extends Component {
 
   onSubmit = (ev) => {
     ev.preventDefault();
+    let username = ev.target.username.value;
 
     let data = JSON.stringify({
       email: ev.target.email.value,
@@ -20,25 +21,15 @@ class CreateAccount extends Component {
       }
     }).then(function (response) {
         console.log(response);
+        sessionStorage.setItem('username', username);
+        window.history.push({
+          pathname: '/home',
+        });
+        window.location.reload();
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    /*fetch(`http://10.0.0.97:3001/new-account`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: {
-        username: ev.target.username.value,
-        email: ev.target.email.value,
-        password: ev.target.password.value,
-      }
-    })
-      .then(response => response.text())
-      .then(response => console.log(response));*/
   };
 
   render(){

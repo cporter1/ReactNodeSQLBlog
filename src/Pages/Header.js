@@ -4,30 +4,58 @@ import "./Header.css";
 
 class Header extends Component {
 
-  //navlinks and brands need href="/path/to/site"
+  isSignedIn() {
+    let username = sessionStorage.getItem('username');
+    return (username !== '' && username !== null);
+  }
 
   render() {
-    return (
-      <Navbar color="light" light expand="md">
-        <NavbarBrand><h1>Thiem Porter</h1></NavbarBrand>
-        <Nav className='ml-auto' navbar>
-          <NavItem>
-            <NavLink href="/create-account">
-              <h4>
-                Create Account
-              </h4>
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/sign-in">
-              <h4>
-                Sign In
-              </h4>
-            </NavLink>
-          </NavItem>
-        </Nav>
-      </Navbar>
-    );
+
+    if(this.isSignedIn()){
+      return(
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href='/home'><h1>Thiem Porter</h1></NavbarBrand>
+          <Nav className='ml-auto' navbar>
+            <NavItem>
+              <NavLink href="/profile">
+                <h4>
+                  Profile
+                </h4>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href='/sign-out'>
+                <h4>
+                  Sign Out
+                </h4>
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Navbar>
+      );
+    } else {
+      return (
+        <Navbar color="light" light expand="md">
+          <NavbarBrand><h1>Thiem Porter</h1></NavbarBrand>
+          <Nav className='ml-auto' navbar>
+            <NavItem>
+              <NavLink href="/create-account">
+                <h4>
+                  Create Account
+                </h4>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/sign-in">
+                <h4>
+                  Sign In
+                </h4>
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Navbar>
+      );
+    }
   }
 
 }
