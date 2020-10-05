@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button} from 'reactstrap';
 import axios from 'axios';
+import history from "../history";
 //import "./CreateAccount.css";
 
 class CreateAccount extends Component {
@@ -15,17 +16,15 @@ class CreateAccount extends Component {
       password: ev.target.password.value
     });
 
-    axios.post('http://10.0.0.97:3001/new-account', data, {
+    axios.post('http://10.0.0.97:3001/createAccount', data, {
       headers: {
         'Content-Type': 'application/json',
       }
     }).then(function (response) {
         console.log(response);
         sessionStorage.setItem('username', username);
-        window.history.push({
-          pathname: '/home',
-        });
-        window.location.reload();
+        history.push('/home');
+        window.location.reload(false);
       })
       .catch(function (error) {
         console.log(error);

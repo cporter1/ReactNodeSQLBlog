@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Navbar, NavbarBrand, NavItem, Nav, NavLink} from 'reactstrap';
+import history from '../history';
 import "./Header.css";
 
 class Header extends Component {
@@ -8,6 +9,12 @@ class Header extends Component {
     let username = sessionStorage.getItem('username');
     return (username !== '' && username !== null);
   }
+
+  signOut = () => {
+    sessionStorage.removeItem('username');
+    history.push('/sign-in');
+    window.location.reload(false);
+  };
 
   render() {
 
@@ -24,7 +31,7 @@ class Header extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href='/sign-out'>
+              <NavLink onClick={this.signOut}>
                 <h4>
                   Sign Out
                 </h4>

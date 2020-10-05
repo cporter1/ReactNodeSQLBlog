@@ -5,6 +5,7 @@ import CreateAccount from "./Pages/CreateAccount";
 import SignIn from "./Pages/SignIn";
 import Header from "./Pages/Header";
 import Home from "./Pages/Home";
+import history from './history';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter history={history}>
         <Header />
         <div className='App'>
           <header className="App-header">
@@ -42,6 +43,12 @@ function App() {
                 isSignedIn()
                   ? <Home username={sessionStorage.getItem('username')}/>
                   : <CreateAccount/>
+              )}/>
+
+              <Route path={'/'} render={() => (
+                isSignedIn()
+                  ? <Home username={sessionStorage.getItem('username')}/>
+                  : <SignIn/>
               )}/>
 
             </Switch>
