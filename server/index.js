@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const app = express(); // create express app
 app.use(bodyParser.json());
 
+const PORT = 3001;
+
 let config = {
   user: 'Eric',
   password: 'pass',
@@ -94,6 +96,6 @@ app.get("/api/hey", (req, res) => {
 });
 
 // start express server on port 5000
-app.listen(3001, () => {
-  console.log("server started on port 3001");
+app.listen(PORT, () => {
+  console.log("server started on port " + PORT);
 });
