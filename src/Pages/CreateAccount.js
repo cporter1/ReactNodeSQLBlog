@@ -1,14 +1,34 @@
 import React, {Component} from 'react';
 import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button} from 'reactstrap';
+import axios from 'axios';
+import history from "../history";
 //import "./CreateAccount.css";
 
 class CreateAccount extends Component {
 
   onSubmit = (ev) => {
-    console.log(ev.target.email.value);
-    console.log(ev.target.email.value);
-    console.log(ev.target.email.value);
+    ev.preventDefault();
+    let username = ev.target.username.value;
 
+    let data = JSON.stringify({
+      email: ev.target.email.value,
+      username: ev.target.username.value,
+      password: ev.target.password.value
+    });
+
+    axios.post('http://10.0.0.97:3001/createAccount', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then(function (response) {
+        console.log(response);
+        sessionStorage.setItem('username', username);
+        history.push('/home');
+        window.location.reload(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   render(){
@@ -30,7 +50,7 @@ class CreateAccount extends Component {
             <InputGroupAddon addonType="prepend">
               <InputGroupText>Username</InputGroupText>
             </InputGroupAddon>
-            <Input id="email" type='text' placeholder="Username" />
+            <Input id="username" type='text' placeholder="Username" />
           </InputGroup>
           <div style={{height: '0.4em'}}/>
           <InputGroup>
