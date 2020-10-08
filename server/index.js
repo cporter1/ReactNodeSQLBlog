@@ -46,19 +46,31 @@ app.post("/signIn", function (req, res) {
 
     // create Request object
     let request = new sql.Request();
-    let query = `SELECT * FROM Accounts Where Email = '${req.body.email}'`;
+    let query = `SELECT * FROM Accounts WHERE Email = '${req.body.email}'`;
 
     // query to the database and get the records
     request.query(query, function (err, response) {
 
-      if (err) console.log(err);
-
-      if(response.recordset[0]['Password'] !== req.body.password){
-        res.statusMessage = "Password does not match for this email";
-        res.status(400).end();
+      // SERVER ERROR
+      if(err){
+        console.log("ERR FROM THIS IS: " +  err);
+        res.status(500).end();
       }
 
-      // send records as a response
+      // EMAIL DOES NOT EXIST IN THE DATABASE
+      else if(!response.recordset){
+        res.statusMessage = "Password does not match for this email";
+        res.status(404)
+      }
+
+      // EMAIL EXISTS IN THE DATABASE BUT THE GIVEN PASSWORD DOES NOT MATCH
+      else if(response.recordset[0]['Password'] !== req.body.password){
+        console.log('reached');
+        res.statusMessage = "Password does not match for this email";
+        res.status(401).end();
+      }
+
+      // SUCCESSFUL LOGIN
       res.statusMessage = "Successful sign in.";
       res.status(200).send(response.recordset);
 

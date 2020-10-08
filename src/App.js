@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router, Switch, Route} from "react-router-dom";
 import './App.css';
 import CreateAccount from "./Pages/CreateAccount";
 import SignIn from "./Pages/SignIn";
@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div>
-      <BrowserRouter history={history}>
+      <Router history={history}>
         <Header />
         <div className='App'>
           <header className="App-header">
@@ -55,7 +55,7 @@ function App() {
 
           </header>
         </div>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
