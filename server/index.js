@@ -9,10 +9,10 @@ app.use(bodyParser.json());
 const PORT = 3001;
 
 let config = {
-  user: 'Eric',
-  password: 'pass',
-  server: '10.0.0.97',
-  database: 'sqldb'
+  user: 'colin',
+  password: '12',
+  server: '2601:647:5800:7000:61e4:f3f2:307e:1f8b',
+  database: 'testDB'
 };
 
 app.use(cors());
@@ -28,7 +28,7 @@ app.get('/sql', function (req, res) {
     let request = new sql.Request();
 
     // query to the database and get the records
-    request.query('SELECT * FROM Vehicles', function (err, recordset) {
+    request.query('SELECT * FROM Customers', function (err, recordset) {
 
       if (err) console.log(err);
 
@@ -39,31 +39,13 @@ app.get('/sql', function (req, res) {
   });
 });
 
-<<<<<<< HEAD
-app.post("/new-account", function (req, res) {
-  sql.connect(config, function (err) {
-
-    console.log(req);
-
-=======
 app.post("/signIn", function (req, res) {
   sql.connect(config, function (err) {
 
->>>>>>> dbc33bb7f73799fe6cb8beb5b378a8f5c209ef92
     if (err) console.log(err);
 
     // create Request object
     let request = new sql.Request();
-<<<<<<< HEAD
-
-    // query to the database and get the records
-    request.query('INSERT INTO Accounts VALUES ('Eric', 'ericthiem23@gmail.com', 'pass')', function (err, response) {
-
-      if (err) console.log(err);
-
-      // send records as a response
-      res.send(response);
-=======
     let query = `SELECT * FROM Accounts Where Email = '${req.body.email}'`;
 
     // query to the database and get the records
@@ -79,15 +61,11 @@ app.post("/signIn", function (req, res) {
       // send records as a response
       res.statusMessage = "Successful sign in.";
       res.status(200).send(response.recordset);
->>>>>>> dbc33bb7f73799fe6cb8beb5b378a8f5c209ef92
 
     });
   });
 });
 
-<<<<<<< HEAD
-
-=======
 app.post("/createAccount", function (req, res) {
   sql.connect(config, function (err) {
 
@@ -108,7 +86,6 @@ app.post("/createAccount", function (req, res) {
     });
   });
 });
->>>>>>> dbc33bb7f73799fe6cb8beb5b378a8f5c209ef92
   
 app.get("/", (req, res) => {
   res.send("homepage");

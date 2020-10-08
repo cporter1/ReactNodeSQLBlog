@@ -8,7 +8,11 @@ class SignIn extends Component {
   constructor(props){
     super(props);
 
-    this.state = {};
+    let data = this.getData();
+
+    this.state = {
+      data: data
+    };
   }
 
   onSubmit = (ev) => {
@@ -41,8 +45,19 @@ class SignIn extends Component {
       });
   };
 
-  render(){
+  getData = (ev) => {
+    axios.get('http://10.0.0.164:3001/sql')
+      .then(function (response) {
+        return(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+    });
+  };
 
+
+  render(){
+    
     return(
       <div className='center'>
 
@@ -65,6 +80,10 @@ class SignIn extends Component {
           <div style={{height: '0.4em'}}/>
           <Button>Sign In</Button>
         </Form>
+
+        <div> 
+           <Label>{this.state.data}</Label>
+        </div>
       </div>
     );
   }
