@@ -11,13 +11,22 @@ class CreateAccount extends Component {
 
     this.state = {
       error_message: '',
-      error_visible: '',
+      error_visible: false,
     }
   }
 
   onSubmit = (ev) => {
     ev.preventDefault();
     let username = ev.target.username.value;
+
+    // VERIFY EMAIL ADDRESS, CHECK TO SEE IF IT HAS AMPERSAND
+    if(!ev.target.email.value.includes('@')){
+      this.setState({
+        error_message: 'Please enter a valid email.',
+        error_visible: true,
+      });
+      return;
+    }
 
     let data = JSON.stringify({
       email: ev.target.email.value,
@@ -87,11 +96,11 @@ class CreateAccount extends Component {
             <Input id="password" type="password" placeholder="Password" />
           </InputGroup>
           <div style={{height: '0.4em'}}/>
-          <Button>Create Account</Button>
-          <div style={{height: '1em'}}/>
           <Alert color="danger" isOpen={this.state.error_visible} toggle={this.onDismiss}>
             {this.state.error_message}
           </Alert>
+          <div style={{height: '0.4em'}}/>
+          <Button>Create Account</Button>
         </Form>
       </div>
     );

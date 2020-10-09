@@ -16,7 +16,6 @@ class SignIn extends Component {
 
   onSubmit = (ev) => {
     ev.preventDefault();
-    //let username = ev.target.username.value;
 
     let data = JSON.stringify({
       email: ev.target.email.value,
@@ -29,9 +28,9 @@ class SignIn extends Component {
       }
     })
 
-      // GOOD LOGIN
       .then(function (response) {
 
+        // GOOD LOGIN
         if(response.status === 200){
           sessionStorage.setItem('username', response.data[0]['Username']);
           history.push('/home');
@@ -39,10 +38,11 @@ class SignIn extends Component {
         }}  )
 
 
-      //HANDLE SERVER ERRORS
+      // HANDLE SERVER ERRORS
       .catch(error => {
         console.log(error.response);
 
+        // ACCOUNT EMAIL NOT FOUND
         if(error.response.status === 404){
           this.setState({
             error_message: 'There is no account with that email.',
@@ -50,6 +50,7 @@ class SignIn extends Component {
           });
         }
 
+        // PASSWORD DOES NOT MATCH
         else if(error.response.status === 401) {
           this.setState({
             error_message: 'Passwords do not match for this email.',
@@ -57,6 +58,7 @@ class SignIn extends Component {
           });
         }
 
+        // SOME OTHER ERROR
         else{
           console.log("ERROR: " + error);
         }
@@ -91,12 +93,11 @@ class SignIn extends Component {
             <Input id="password" type="password" placeholder="Password" />
           </InputGroup>
           <div style={{height: '0.4em'}}/>
-          <Button>Sign In</Button>
-
-          <div style={{height: '1em'}}/>
           <Alert color="danger" isOpen={this.state.error_visible} toggle={this.onDismiss}>
             {this.state.error_message}
           </Alert>
+          <div style={{height: '0.4em'}}/>
+          <Button>Sign In</Button>
         </Form>
       </div>
     );
