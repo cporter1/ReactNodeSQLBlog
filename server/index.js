@@ -54,25 +54,31 @@ app.post("/signIn", function (req, res) {
       // SERVER ERROR
       if(err){
         console.log("ERR FROM THIS IS: " +  err);
-        res.status(500).end();
+        console.log("This is the error response: " + response);
+        res.status(500).send('SERVER ERROR');
       }
 
       // EMAIL DOES NOT EXIST IN THE DATABASE
-      else if(!response.recordset){
-        res.statusMessage = "Password does not match for this email";
-        res.status(404)
+      if(Object.keys(response.recordset).length === 0){
+        res.statusMessage = "Email Not Found";
+        res.statusCode = 404;
+        res.end();
       }
 
       // EMAIL EXISTS IN THE DATABASE BUT THE GIVEN PASSWORD DOES NOT MATCH
       else if(response.recordset[0]['Password'] !== req.body.password){
         console.log('reached');
         res.statusMessage = "Password does not match for this email";
-        res.status(401).end();
+        res.statusCode = 401;
+        res.end();
       }
 
       // SUCCESSFUL LOGIN
-      res.statusMessage = "Successful sign in.";
-      res.status(200).send(response.recordset);
+      else {
+        //res.statusMessage = "Successful sign in.";
+        //res.status = 200;
+        res.send(response.recordset);
+      }
 
     });
   });

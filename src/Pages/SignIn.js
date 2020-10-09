@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button} from 'reactstrap';
+import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button, Alert} from 'reactstrap';
 import history from '../history';
 import axios from "axios";
 
@@ -8,7 +8,10 @@ class SignIn extends Component {
   constructor(props){
     super(props);
 
-    this.state = {};
+    this.state = {
+      error_message: '',
+      error_visible: false,
+    };
   }
 
   onSubmit = (ev) => {
@@ -24,21 +27,47 @@ class SignIn extends Component {
       headers: {
         'Content-Type': 'application/json',
       }
-    }).then(function (response) {
-      if(response.status === 200){
-        sessionStorage.setItem('username', response.data[0]['Username']);
-        history.push('/home');
-        window.location.reload(false);
-      }
-
-      else if(response.status === 400){
-        console.log('BAD LOGIN');
-        //TODO HANDLE BAD LOGIN
-      }
     })
-      .catch(function (error) {
-        console.log("ERROR " + error);
+
+      // GOOD LOGIN
+      .then(function (response) {
+
+        if(response.status === 200){
+          sessionStorage.setItem('username', response.data[0]['Username']);
+          history.push('/home');
+          window.location.reload(false);
+        }}  )
+
+
+      //HANDLE SERVER ERRORS
+      .catch(error => {
+        console.log(error.response);
+
+        if(error.response.status === 404){
+          this.setState({
+            error_message: 'There is no account with that email.',
+            error_visible: true,
+          });
+          console.log('reached');
+        }
+
+        else if(error.response.status === 401) {
+          this.setState({
+            error_message: 'Passwords do not match for this email.',
+            error_visible: true,
+          });
+        }
+
+        else{
+          console.log("ERROR: " + error);
+        }
       });
+  };
+
+  onDismiss = () => {
+    this.setState({
+      error_visible: false,
+    });
   };
 
   render(){
@@ -64,6 +93,11 @@ class SignIn extends Component {
           </InputGroup>
           <div style={{height: '0.4em'}}/>
           <Button>Sign In</Button>
+
+          <div style={{height: '1em'}}/>
+          <Alert color="danger" isOpen={this.state.error_visible} toggle={this.onDismiss}>
+            {this.state.error_message}
+          </Alert>
         </Form>
       </div>
     );
