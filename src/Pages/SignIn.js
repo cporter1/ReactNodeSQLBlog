@@ -7,14 +7,19 @@ class SignIn extends Component {
 
   constructor(props){
     super(props);
-
-    let data = this.getData();
-
     this.state = {
-      data: data
+      data: null
     };
   }
 
+  componentDidMount() {
+    fetch('http://10.0.0.164:3001/sql')
+        .then(response => response.json())
+        .then(data => {
+          // console.log(JSON.stringify(data));
+          this.setState({data: JSON.stringify(data)});
+        })
+  }
   onSubmit = (ev) => {
     ev.preventDefault();
     //let username = ev.target.username.value;
@@ -45,22 +50,10 @@ class SignIn extends Component {
       });
   };
 
-  getData = (ev) => {
-    axios.get('http://10.0.0.164:3001/sql')
-      .then(function (response) {
-        return(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-    });
-  };
-
-
   render(){
     
     return(
       <div className='center'>
-
         <Label>Sign In!</Label>
 
         <Form onSubmit={this.onSubmit}>
@@ -82,7 +75,7 @@ class SignIn extends Component {
         </Form>
 
         <div> 
-           <Label>{this.state.data}</Label>
+           <ul>{this.state.data}</ul>
         </div>
       </div>
     );

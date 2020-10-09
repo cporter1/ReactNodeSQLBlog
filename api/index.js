@@ -11,7 +11,7 @@ const PORT = 3001;
 let config = {
   user: 'colin',
   password: '12',
-  server: '2601:647:5800:7000:61e4:f3f2:307e:1f8b',
+  server: '2601:647:5800:7000:4479:a822:4ba3:c901',
   database: 'testDB'
 };
 
@@ -28,12 +28,12 @@ app.get('/sql', function (req, res) {
     let request = new sql.Request();
 
     // query to the database and get the records
-    request.query('SELECT * FROM Customers', function (err, recordset) {
+    request.query('SELECT TOP 1 * FROM Customers', function (err, resp) {
 
       if (err) console.log(err);
-
+      // console.log(resp);
       // send records as a response
-      res.send(recordset.recordset);
+      res.send(resp.recordset);
 
     });
   });
