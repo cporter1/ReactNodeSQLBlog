@@ -1,10 +1,19 @@
 import React, {Component} from 'react';
-import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button} from 'reactstrap';
+import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button, Alert} from 'reactstrap';
 import axios from 'axios';
 import history from "../history";
 //import "./CreateAccount.css";
 
 class CreateAccount extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      error_message: '',
+      error_visible: '',
+    }
+  }
 
   onSubmit = (ev) => {
     ev.preventDefault();
@@ -21,14 +30,32 @@ class CreateAccount extends Component {
         'Content-Type': 'application/json',
       }
     }).then(function (response) {
-        console.log(response);
+
+      //SUCCESSFUL ACCOUNT CREATION
+      if(response.status === 200){
         sessionStorage.setItem('username', username);
         history.push('/home');
         window.location.reload(false);
-      })
-      .catch(function (error) {
-        console.log(error);
+      }})
+      .catch(error => {
+
+        if(error.response.status === 406){
+          this.setState({
+            error_message: 'There is already an account with that email.',
+            error_visible: true,
+          });
+        }
+
+        else{
+          console.log("ERROR: " + error);
+        }
       });
+  };
+
+  onDismiss = () => {
+    this.setState({
+      error_visible: false,
+    });
   };
 
   render(){
@@ -61,6 +88,10 @@ class CreateAccount extends Component {
           </InputGroup>
           <div style={{height: '0.4em'}}/>
           <Button>Create Account</Button>
+          <div style={{height: '1em'}}/>
+          <Alert color="danger" isOpen={this.state.error_visible} toggle={this.onDismiss}>
+            {this.state.error_message}
+          </Alert>
         </Form>
       </div>
     );

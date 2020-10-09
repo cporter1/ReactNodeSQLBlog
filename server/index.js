@@ -55,7 +55,8 @@ app.post("/signIn", function (req, res) {
       if(err){
         console.log("ERR FROM THIS IS: " +  err);
         console.log("This is the error response: " + response);
-        res.status(500).send('SERVER ERROR');
+        res.statusCode = 500;
+        res.end();
       }
 
       // EMAIL DOES NOT EXIST IN THE DATABASE
@@ -89,18 +90,36 @@ app.post("/createAccount", function (req, res) {
 
     if (err) console.log(err);
 
-    // create Request object
-    let request = new sql.Request();
-    let query = `INSERT INTO Accounts VALUES ('${req.body.email}', '${req.body.username}', '${req.body.password}')`;
+    // CHECK TO SEE IF THERE ARE MORE THAN ONE ENTRY FOR AN EMAIL IN THE DATABASE
+    let check_request = new sql.Request();
+    let check_query = `SELECT COUNT(1) From Accounts Where Email = '${req.body.email}'`;
 
-    // query to the database and get the records
-    request.query(query, function (err, response) {
+    check_request.query(check_query, function (err, response) {
 
       if (err) console.log(err);
 
-      // send records as a response
-      res.send(response);
+      // Check to see if the number of that email is greater than one is greater than
+      let numEmails = response.recordset[0][''];
+      if (numEmails > 0){
+        res.statusCode = 406;
+        res.end();
+      }
 
+      //There are no accounts with that email in the database
+      else {
+        let request = new sql.Request();
+        let query = `INSERT INTO Accounts VALUES ('${req.body.email}', '${req.body.username}', '${req.body.password}')`;
+
+        // query to the database and get the records
+        request.query(query, function (err, response) {
+
+          if (err) console.log(err);
+
+          // Account successfully created
+          res.send(response);
+
+        });
+      }
     });
   });
 });

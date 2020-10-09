@@ -48,7 +48,6 @@ class SignIn extends Component {
             error_message: 'There is no account with that email.',
             error_visible: true,
           });
-          console.log('reached');
         }
 
         else if(error.response.status === 401) {
