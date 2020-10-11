@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Navbar, NavbarBrand, NavItem, Nav, NavLink} from 'reactstrap';
 import history from '../history';
-import "./Header.css";
+import "../css/Header.css";
 
 class Header extends Component {
 

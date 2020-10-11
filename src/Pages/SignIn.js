@@ -13,13 +13,18 @@ class SignIn extends Component {
   }
 
   componentDidMount() {
-    fetch('http://10.0.0.164:3001/sql')
-        .then(response => response.json())
-        .then(data => {
-          // console.log(JSON.stringify(data));
-          this.setState({data: JSON.stringify(data)});
-        })
+    axios.get('http://10.0.0.164:3001/sql')
+      .then( (resp) => {
+        console.log(resp.data)
+        this.setState({data: JSON.stringify(resp.data)});
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      })
   }
+
+
+  
   onSubmit = (ev) => {
     ev.preventDefault();
     //let username = ev.target.username.value;
