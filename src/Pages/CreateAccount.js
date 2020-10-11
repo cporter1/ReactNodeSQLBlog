@@ -28,9 +28,12 @@ class CreateAccount extends Component {
       return;
     }
 
+    let user = ev.target.username.value;
+    user = user.replace("'", "''");
+
     let data = JSON.stringify({
       email: ev.target.email.value,
-      username: ev.target.username.value,
+      username: user,
       password: ev.target.password.value
     });
 

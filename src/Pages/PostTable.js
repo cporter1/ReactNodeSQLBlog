@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Table } from 'reactstrap';
 import axios from "axios";
+import history from "../history";
 
 class PostTable extends Component {
 
@@ -11,16 +12,23 @@ class PostTable extends Component {
       posts: []
     };
 
-    this.loadPosts();
+    this.getPosts();
   }
 
-  goToPost = () => {
-
+  goToPost = (index) => {
+    let postID = this.getPostID(index);
+    //console.log(this.state.posts);
+    //console.log(postID);
+    history.push(`/post/${postID}`);
+    window.location.reload(false);
   };
 
-  loadPosts = () => {
+  getPostID = (index) => {
+    return this.state.posts[index]['PostID'];
+  };
+
+  getPosts = () => {
     axios.get('http://10.0.0.97:3001/getPosts').then(response => {
-      //console.log(response.data[0]['Title']);
       this.setState({posts: response.data});
     }).catch(error => {
       console.log(error);

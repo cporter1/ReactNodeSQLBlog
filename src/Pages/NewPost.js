@@ -14,6 +14,10 @@ class NewPost extends Component {
     };
   }
 
+  getNewCode = () => {
+    return [...Array(8)].map(i=>(~~(Math.random()*36)).toString(36)).join('');
+  };
+
   submitPost = (ev) => {
     ev.preventDefault();
     let today = new Date();
@@ -24,14 +28,19 @@ class NewPost extends Component {
       + today.getMinutes() + ':'
       + today.getSeconds();
 
-    let data = JSON.stringify({
-      title: ev.target.title.value,
-      author: this.props.username,
-      body: ev.target.body.value,
-      timePosted: timePosted,
-    });
+    let title = ev.target.title.value;
+    let body = ev.target.body.value;
 
-    console.log(data);
+    title = title.replace("'", "''");
+    body = body.replace("'", "''");
+
+    let data = JSON.stringify({
+      title: title,
+      author: this.props.username,
+      body: body,
+      timePosted: timePosted,
+      postID: this.getNewCode(),
+    });
 
     axios.post('http://10.0.0.97:3001/newPost', data, {
       headers: {

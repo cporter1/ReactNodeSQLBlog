@@ -1,5 +1,5 @@
 import React from "react";
-import {Router, Switch, Route} from "react-router-dom";
+import {Router, Switch, Route, useParams} from "react-router-dom";
 import './App.css';
 import CreateAccount from "./Pages/CreateAccount";
 import SignIn from "./Pages/SignIn";
@@ -31,6 +31,12 @@ function App() {
               <Route path={'/home'} render={() => (
                 isSignedIn()
                   ? <Home username={sessionStorage.getItem('username')}/>
+                  : <SignIn/>
+              )}/>
+
+              <Route path={'/post/:postID'} render={(post) => (
+                isSignedIn()
+                  ? <Home postID={post.match.params.postID}/>
                   : <SignIn/>
               )}/>
 

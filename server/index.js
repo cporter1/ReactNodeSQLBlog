@@ -128,7 +128,7 @@ app.post("/newPost", function (req, res) {
     if (err) console.log(err);
 
     let request = new sql.Request();
-    let query = `INSERT INTO Posts VALUES ('${req.body.title}', '${req.body.author}', '${req.body.body}', '${req.body.timePosted}')`;
+    let query = `INSERT INTO Posts VALUES ('${req.body.title}', '${req.body.author}', '${req.body.body}', '${req.body.timePosted}', '${req.body.postID}')`;
 
     // query to the database and get the records
     request.query(query, function (err, response) {
@@ -143,8 +143,6 @@ app.post("/newPost", function (req, res) {
 
 app.get("/getPosts", (req, res) => {
 
-  console.log('reached');
-
   // connect to your database
   sql.connect(config, function (err) {
 
@@ -155,6 +153,27 @@ app.get("/getPosts", (req, res) => {
 
     // query to the database and get the records
     request.query('SELECT * FROM Posts', function (err, response) {
+
+      if (err) console.log(err);
+
+      // send records as a response
+      res.send(response.recordset);
+
+    });
+  });
+});
+
+app.get('/post/:postID', function (req, res) {
+
+  sql.connect(config, function (err) {
+
+    if (err) console.log(err);
+
+    // create Request object
+    let request = new sql.Request();
+
+    // query to the database and get the records
+    request.query(`SELECT * FROM Posts WHERE PostID = '${req.params['postID']}'`, function (err, response) {
 
       if (err) console.log(err);
 
