@@ -5,6 +5,7 @@ import CreateAccount from "./Pages/CreateAccount";
 import SignIn from "./Pages/SignIn";
 import Header from "./Pages/Header";
 import Home from "./Pages/Home";
+import NewPost from "./Pages/NewPost";
 import history from './history';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -30,6 +31,12 @@ function App() {
               <Route path={'/home'} render={() => (
                 isSignedIn()
                   ? <Home username={sessionStorage.getItem('username')}/>
+                  : <SignIn/>
+              )}/>
+
+              <Route path={'/new-post'} render={() => (
+                isSignedIn()
+                  ? <NewPost username={sessionStorage.getItem('username')}/>
                   : <SignIn/>
               )}/>
 

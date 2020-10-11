@@ -68,7 +68,6 @@ app.post("/signIn", function (req, res) {
 
       // EMAIL EXISTS IN THE DATABASE BUT THE GIVEN PASSWORD DOES NOT MATCH
       else if(response.recordset[0]['Password'] !== req.body.password){
-        console.log('reached');
         res.statusMessage = "Password does not match for this email";
         res.statusCode = 401;
         res.end();
@@ -120,6 +119,48 @@ app.post("/createAccount", function (req, res) {
 
         });
       }
+    });
+  });
+});
+
+app.post("/newPost", function (req, res) {
+  sql.connect(config, function (err) {
+    if (err) console.log(err);
+
+    let request = new sql.Request();
+    let query = `INSERT INTO Posts VALUES ('${req.body.title}', '${req.body.author}', '${req.body.body}', '${req.body.timePosted}')`;
+
+    // query to the database and get the records
+    request.query(query, function (err, response) {
+
+      if (err) console.log(err);
+
+      // Account successfully created
+      res.send(response);
+    });
+  });
+});
+
+app.get("/getPosts", (req, res) => {
+
+  console.log('reached');
+
+  // connect to your database
+  sql.connect(config, function (err) {
+
+    if (err) console.log(err);
+
+    // create Request object
+    let request = new sql.Request();
+
+    // query to the database and get the records
+    request.query('SELECT * FROM Posts', function (err, response) {
+
+      if (err) console.log(err);
+
+      // send records as a response
+      res.send(response.recordset);
+
     });
   });
 });
