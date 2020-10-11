@@ -3,33 +3,6 @@ const DBLogin = require('../config/db.config.js'); //fetch loginDetails from con
 const cors = require('cors');
 
 
-async function getAccount(argEmail) {
-
-    const DBquery = 
-    `SELECT * FROM users WHERE email = '${argEmail}'`;
-
-    sql.connect(DBLogin, async (err) => {
-
-        if (err) {
-            console.log(err);
-            return;
-        } 
-        // create Request object
-        let request = new sql.Request();
-
-        // query to the database and get the records (data)
-        request.query(DBquery, (err, res) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            console.log(' DBgetAccount output: ', res.recordset);
-            return (res.recordset);
-        });
-            
-    });
-};
-
 async function DBgetAccount(argEmail) {
 
     const DBquery = 
@@ -41,7 +14,6 @@ async function DBgetAccount(argEmail) {
     pool.close;
     sql.close;
 
-    console.log(data);
     return data;
 
 }
