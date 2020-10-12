@@ -9,10 +9,8 @@ class PostTable extends Component {
     super(props);
 
     this.state = {
-      posts: []
+      posts: this.props.posts,
     };
-
-    this.getPosts();
   }
 
   goToPost = (index) => {
@@ -25,14 +23,6 @@ class PostTable extends Component {
 
   getPostID = (index) => {
     return this.state.posts[index]['PostID'];
-  };
-
-  getPosts = () => {
-    axios.get('http://10.0.0.97:3001/getPosts').then(response => {
-      this.setState({posts: response.data});
-    }).catch(error => {
-      console.log(error);
-    });
   };
 
   render(){

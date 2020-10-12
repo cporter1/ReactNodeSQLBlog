@@ -60,7 +60,11 @@ class SignIn extends Component {
 
         // SOME OTHER ERROR
         else{
-          console.log("ERROR: " + error);
+          this.setState({
+            error_message: 'Unknown Sign In Error...',
+            error_visible: true,
+          });
+          console.log("ERROR FROM SIGN IN: " + error);
         }
       });
   };

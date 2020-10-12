@@ -3,6 +3,7 @@ import { Label, Button } from 'reactstrap';
 import history from "../history";
 import PostTable from "./PostTable";
 import ViewPost from "./ViewPost";
+import axios from "axios";
 
 class Home extends Component {
 
@@ -10,9 +11,24 @@ class Home extends Component {
     super(props);
 
     this.state = {
+      posts: [],
       postID: this.props.postID,
+      loading: true,
     };
+
+    this.getPosts();
   }
+
+  getPosts = () => {
+    axios.get('http://10.0.0.97:3001/getPosts').then(response => {
+      this.setState({
+        posts: response.data,
+        loading: false,
+      });
+    }).catch(error => {
+      console.log(error);
+    });
+  };
 
   createPost = () => {
     history.push('/new-post');
@@ -21,23 +37,30 @@ class Home extends Component {
 
   render(){
 
-    console.log(this.state.postID);
+    if(!this.state.loading){
 
-    if(this.state.postID){
-      return (
-        <div>
-          <Label>Viewing Post!</Label>
-          <ViewPost postID={this.state.postID}/>
-        </div>
-      )
+      if(this.state.postID){
 
+        return (
+          <div>
+            <Label>Viewing Post!</Label>
+            <ViewPost postID={this.state.postID}/>
+          </div>
+        )
+
+      } else {
+
+        return(
+          <div>
+            <Label>Hello {this.props.username}!</Label>
+            <PostTable posts={this.state.posts}/>
+            <Button onClick={this.createPost}>Create Post</Button>
+          </div>
+        )
+      }
     } else {
-      return(
-        <div>
-          <Label>Hello {this.props.username}!</Label>
-          <PostTable/>
-          <Button onClick={this.createPost}>Create Post</Button>
-        </div>
+      return (
+        <Label>Loading...</Label>
       )
     }
   }

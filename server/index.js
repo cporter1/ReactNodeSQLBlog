@@ -7,6 +7,7 @@ const app = express(); // create express app
 app.use(bodyParser.json());
 
 const PORT = 3001;
+let counter = 0;
 
 let config = {
   user: 'Eric',
@@ -190,6 +191,11 @@ app.get("/", (req, res) => {
 
 app.get("/api/hey", (req, res) => {
   res.send("Hello from the Node.js server!");
+});
+
+app.get('/counter', function(req, res){
+  counter++;
+  res.send("You have connected "+ counter + " times");
 });
 
 // start express server on port 5000
