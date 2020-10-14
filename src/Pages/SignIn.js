@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button, Alert} from 'reactstrap';
 import history from '../history';
 import axios from "axios";
+import './SignIn.css';
 
 class SignIn extends Component {
 
@@ -78,7 +79,7 @@ class SignIn extends Component {
   render(){
 
     return(
-      <div className='center'>
+      <div className='SignIn'>
 
         <Label>Sign In!</Label>
 

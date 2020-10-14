@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Label, Button, InputGroupAddon, InputGroupText, Input, InputGroup, Form, Alert} from 'reactstrap';
 import axios from "axios";
 import history from "../history";
+import { Editor } from '@tinymce/tinymce-react';
 
 class NewPost extends Component {
 
@@ -71,6 +72,10 @@ class NewPost extends Component {
       });
   };
 
+  handleEditorChange = (content, editor) => {
+    console.log('Content was updated:', content);
+  };
+
   render(){
     return(
       <div>
@@ -96,6 +101,22 @@ class NewPost extends Component {
           <div style={{height: '0.4em'}}/>
           <Button type='submit'>Submit Post</Button>
         </Form>
+
+        <Editor
+          initialValue="<p>This is the initial content of the editor</p>"
+          init={{
+            height: 500,
+            menubar: false,
+            plugins: [
+              'advlist autolink lists link image charmap print preview anchor',
+              'searchreplace visualblocks code fullscreen',
+              'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar:
+              'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
+          }}
+          onEditorChange={this.handleEditorChange}
+          />
       </div>
     )
   }

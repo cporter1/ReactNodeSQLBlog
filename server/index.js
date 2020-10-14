@@ -198,6 +198,10 @@ app.get('/counter', function(req, res){
   res.send("You have connected "+ counter + " times");
 });
 
+app.get('/video', function(req, res){
+  res.send('https://www.youtube.com/watch?v=ioZ9EUUIH5o&ab_channel=Erynith');
+});
+
 // start express server on port 5000
 app.listen(PORT, () => {
   console.log("server started on port " + PORT);

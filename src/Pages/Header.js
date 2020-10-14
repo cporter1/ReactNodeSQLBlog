@@ -43,7 +43,7 @@ class Header extends Component {
     } else {
       return (
         <Navbar color="light" light expand="md">
-          <NavbarBrand><h1>Thiem Porter</h1></NavbarBrand>
+          <NavbarBrand  href='/sign-in'><h1>Thiem Porter</h1></NavbarBrand>
           <Nav className='ml-auto' navbar>
             <NavItem>
               <NavLink href="/create-account">

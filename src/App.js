@@ -20,11 +20,11 @@ function isSignedIn() {
 function App() {
 
   return (
-    <div>
+    <div className='App'>
       <Router history={history}>
         <Header />
-        <div className='App'>
-          <header className="App-header">
+        <div>
+          <header>
 
             <Switch>
 
