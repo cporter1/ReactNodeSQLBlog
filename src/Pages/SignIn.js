@@ -81,7 +81,7 @@ class SignIn extends Component {
     return(
       <div className='SignIn'>
 
-        <Label>Sign In!</Label>
+        <Label>Sign In</Label>
 
         <Form onSubmit={this.onSubmit}>
           <InputGroup>

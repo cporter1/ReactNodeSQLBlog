@@ -3,6 +3,7 @@ import {Label, Button, InputGroupAddon, InputGroupText, Input, InputGroup, Form,
 import axios from "axios";
 import history from "../history";
 import { Editor } from '@tinymce/tinymce-react';
+import "./NewPost.css";
 
 class NewPost extends Component {
 
@@ -78,7 +79,7 @@ class NewPost extends Component {
 
   render(){
     return(
-      <div>
+      <div className='NewPost'>
         <Label>Create a New Post</Label>
         <Form onSubmit={this.submitPost}>
           <InputGroup>
@@ -102,8 +103,11 @@ class NewPost extends Component {
           <Button type='submit'>Submit Post</Button>
         </Form>
 
+        <div style={{height: '0.4em'}}/>
+
         <Editor
-          initialValue="<p>This is the initial content of the editor</p>"
+          apiKey='eo1bupzvob80fnuz2iky51mtcakgv8coz2tpamlt4coapd24'
+          initialValue='Hello'
           init={{
             height: 500,
             menubar: false,

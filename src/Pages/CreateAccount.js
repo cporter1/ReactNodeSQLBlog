@@ -75,27 +75,18 @@ class CreateAccount extends Component {
     return(
       <div className='SignIn'>
 
-        <Label>Welcome!</Label>
+        <Label>Create An Account</Label>
 
         <Form onSubmit={this.onSubmit}>
           <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Email</InputGroupText>
-            </InputGroupAddon>
-            <Input id="email" type='text' placeholder="Email" />
+            <Input class="w-25" id="email" type='text' placeholder="Email" />
           </InputGroup>
           <div style={{height: '0.4em'}}/>
           <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Username</InputGroupText>
-            </InputGroupAddon>
             <Input id="username" type='text' placeholder="Username" />
           </InputGroup>
           <div style={{height: '0.4em'}}/>
           <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Password</InputGroupText>
-            </InputGroupAddon>
             <Input id="password" type="password" placeholder="Password" />
           </InputGroup>
           <div style={{height: '0.4em'}}/>

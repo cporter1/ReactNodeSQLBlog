@@ -4,6 +4,7 @@ import history from "../history";
 import PostTable from "./PostTable";
 import ViewPost from "./ViewPost";
 import axios from "axios";
+import "./Home";
 
 class Home extends Component {
 
@@ -42,7 +43,7 @@ class Home extends Component {
       if(this.state.postID){
 
         return (
-          <div>
+          <div className='Home'>
             <Label>Viewing Post!</Label>
             <ViewPost postID={this.state.postID}/>
           </div>
@@ -51,8 +52,7 @@ class Home extends Component {
       } else {
 
         return(
-          <div>
-            <Label>Hello {this.props.username}!</Label>
+          <div className='Home'>
             <PostTable posts={this.state.posts}/>
             <Button onClick={this.createPost}>Create Post</Button>
           </div>
@@ -60,7 +60,9 @@ class Home extends Component {
       }
     } else {
       return (
-        <Label>Loading...</Label>
+        <div className='Home'>
+          <Label>Loading...</Label>
+        </div>
       )
     }
   }

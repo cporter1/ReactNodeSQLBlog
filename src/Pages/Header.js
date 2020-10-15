@@ -26,7 +26,7 @@ class Header extends Component {
             <NavItem>
               <NavLink href="/profile">
                 <h4>
-                  Profile
+                  {sessionStorage.getItem('username')}
                 </h4>
               </NavLink>
             </NavItem>

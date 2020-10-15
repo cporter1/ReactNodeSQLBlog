@@ -27,7 +27,7 @@ class PostTable extends Component {
 
   render(){
     return (
-      <Table dark borderless hover>
+      <Table dark hover striped>
 
         {Object.keys(this.state.posts).map((key, index) => {
           return (
