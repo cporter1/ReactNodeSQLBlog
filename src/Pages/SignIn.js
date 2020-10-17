@@ -1,59 +1,48 @@
 import React, {Component} from 'react';
 import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button} from 'reactstrap';
 import history from '../history';
-import axios from "axios";
+import {login} from '../services/auth.service';
 
 class SignIn extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      data: null
-    };
+    this.state = {};
   }
 
   componentDidMount() {
-    axios.get('http://10.0.0.164:3001/sql')
-      .then( (resp) => {
-        console.log(resp.data)
-        this.setState({data: JSON.stringify(resp.data)});
-      })
-      .catch((err) => {
-        console.log('Error: ', err);
-      })
+    
   }
 
 
-  
-  onSubmit = (ev) => {
+
+  onSubmitLogin = (ev) => {
     ev.preventDefault();
-    //let username = ev.target.username.value;
+    
+    console.log('onSumbitLogin being called', ev.target.email.value,
+      ev.target.password.value)
+      
+    login(ev.target.email.value, ev.target.password.value)
+      .then(response => {
 
-    let data = JSON.stringify({
-      email: ev.target.email.value,
-      password: ev.target.password.value
-    });
+        console.log(response)
+        if(response.status === 200) {
 
-    axios.post('http://10.0.0.97:3001/signIn', data, {
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    }).then(function (response) {
-      if(response.status === 200){
-        sessionStorage.setItem('username', response.data[0]['Username']);
-        history.push('/home');
-        window.location.reload(false);
-      }
+          history.push('/home')
+          window.location.reload(false);
+        }
+        else if (response.status === 401) {
+          console.log('Bad Login')
+        }
 
-      else if(response.status === 400){
-        console.log('BAD LOGIN');
-        //TODO HANDLE BAD LOGIN
-      }
-    })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+      })
+      .catch(err => {
+        console.log('Bad Login')
+      })
+
+  }
+
+
 
   render(){
     
@@ -61,7 +50,7 @@ class SignIn extends Component {
       <div className='center'>
         <Label>Sign In!</Label>
 
-        <Form onSubmit={this.onSubmit}>
+        <Form onSubmit={this.onSubmitLogin}>
           <InputGroup>
             <InputGroupAddon addonType="prepend">
               <InputGroupText>Email</InputGroupText>
@@ -78,10 +67,6 @@ class SignIn extends Component {
           <div style={{height: '0.4em'}}/>
           <Button>Sign In</Button>
         </Form>
-
-        <div> 
-           <ul>{this.state.data}</ul>
-        </div>
       </div>
     );
   }

@@ -1,37 +1,41 @@
 import axios from "axios";
-import { response } from "express";
 
-class AuthService {
-    
-    login(username, password) {
-        return axios
-            .post(API_URL + "signin", {
-                username,
-                password
-            })
-            .then(response => {
-                if(response.data.accessToken) {
-                    localStorage.setItem("user", JSON.stringify(response.data));
-                }
-                return response.data;
-            });
-    }
+const API_URL = 'http://10.0.0.164:3001/';
 
-    logout() {
-        localStorage.removeItem("user");
-    }
 
-    register(username, email, password) {
-        return axios.post(API_URL + "signup", {
-            username,
+function login(email, password) {
+    return axios
+        .post(API_URL + "users/login", {
             email,
             password
-        });
-    }
-
-    getCurrentUser() {
-        return JSON.parse(localStorage.getItem('user'));
-    }
+        })
+        .then(response => {
+            if(response.data) {
+                sessionStorage.setItem("user", JSON.stringify(response.data));
+            }
+            
+            return response;
+        })
+        .catch((err) => {
+            console.log('Error: ', err);
+        })
 }
 
-export default new AuthService();
+function logout() {
+    localStorage.removeItem("user");
+}
+
+function register(username, email, password) {
+    return axios.post(API_URL + "users/createaccount", {
+        username,
+        email,
+        password
+    });
+}
+
+function getCurrentUser() {
+    return JSON.parse(localStorage.getItem('user'));
+}
+
+
+export {login,logout,register,getCurrentUser};

@@ -12,8 +12,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 //Function to check if the user is logged in
 //Returns true if username is found in session storage, false if not
 function isSignedIn() {
-  let username = sessionStorage.getItem('username');
-  return (username !== '' && username !== null);
+  let user = sessionStorage.getItem('user');
+  return (user !== '' && user !== null);
 }
 
 function App() {
@@ -29,25 +29,25 @@ function App() {
 
               <Route path={'/home'} render={() => (
                 isSignedIn()
-                  ? <Home username={sessionStorage.getItem('username')}/>
+                  ? <Home user={sessionStorage.getItem('user')}/>
                   : <SignIn/>
               )}/>
 
               <Route path={'/sign-in'} render={() => (
                 isSignedIn()
-                  ? <Home username={sessionStorage.getItem('username')}/>
+                  ? <Home user={sessionStorage.getItem('username')}/>
                   : <SignIn/>
               )}/>
 
               <Route path={'/create-account'} render={() => (
                 isSignedIn()
-                  ? <Home username={sessionStorage.getItem('username')}/>
+                  ? <Home user={sessionStorage.getItem('username')}/>
                   : <CreateAccount/>
               )}/>
 
               <Route path={'/'} render={() => (
                 isSignedIn()
-                  ? <Home username={sessionStorage.getItem('username')}/>
+                  ? <Home user={sessionStorage.getItem('username')}/>
                   : <SignIn/>
               )}/>
 

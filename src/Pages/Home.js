@@ -7,10 +7,11 @@ class Home extends Component {
     super(props);
   }
 
+
   render(){
     return(
       <div>
-        <Label>Hello {this.props.username}!</Label>
+        <Label>Hello {JSON.parse(sessionStorage.getItem('user')).email}!</Label>
       </div>
     )
   }

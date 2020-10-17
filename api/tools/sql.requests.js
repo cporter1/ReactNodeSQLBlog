@@ -13,34 +13,24 @@ async function DBgetAccount(argEmail) {
 
     pool.close;
     sql.close;
-
+    console.log('data: ', data)
     return data;
-
 }
 
-async function DBcreateAccount(email,name,password) {
+async function DBcreateAccount(argEmail, argPassword, argName,) {
     //create query for this function
     let DBquery = 
-        "INSERT INTO users (email, name, password) \
-        VALUES (?, ?, ?)";
+        `INSERT INTO users (email, username, password) \
+        VALUES ('${argEmail}', '${argName}', '${argPassword}')`;
 
-    sql.connect(DBLogin, (err) => {
+    let pool = await sql.connect(DBLogin);
+    let data = await pool.request().query(DBquery);
+    console.log('data: ', data)
+    
+    pool.close;
+    sql.close;      
 
-        if (err) console.log(err);
-        // create Request object
-        let request = new sql.Request();
-    
-        // query to the database and get the records (data)
-        request.query(DBquery, [email,name,password], (err, resp) => {
-    
-          if (err) console.log(err);
-          // console.log(resp);
-    
-          // send records as a response
-          return(resp.recordset);
-    
-        });
-    });
+    return data;
 }
 
 //export the db call functions

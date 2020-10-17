@@ -15,17 +15,6 @@ app.use(express.json()); //allows server to handle json
 app.use('/users', authRoutes);
 
 
-app.get('/sql', (req,res) => {
-  DBcalls.DBgetAccount('email@email.com')
-    .then(result => {res.send(result.recordset)})
-    .catch(err => {
-      pool.close;
-      sql.close;
-      console.log(err)
-    });
-})
-
-
 
 // start express server on the enviroment port or port 3001
 app.listen(port, err  => {
