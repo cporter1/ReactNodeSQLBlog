@@ -199,7 +199,7 @@ app.get('/counter', function(req, res){
 });
 
 app.get('/video', function(req, res){
-  res.send('https://www.youtube.com/watch?v=ioZ9EUUIH5o&ab_channel=Erynith');
+  res.send('<meta http-equiv="refresh" content="0; URL=https://www.youtube.com/watch?v=5T5BY1j2MkE&ab_channel=RoastedCurry" />');
 });
 
 // start express server on port 5000

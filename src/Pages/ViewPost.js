@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert, Button, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Table} from 'reactstrap';
+import { Row, Col, Form, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import axios from "axios";
 
 class ViewPost extends Component {
@@ -31,21 +31,25 @@ class ViewPost extends Component {
     if(!this.state.loading){
       return(
         <div>
-          <Form>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>Title</InputGroupText>
-              </InputGroupAddon>
-              <Input id="title" type='text' disabled defaultValue={this.state.post[0]['Title']}/>
-            </InputGroup>
-            <div style={{height: '0.4em'}}/>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>Body</InputGroupText>
-              </InputGroupAddon>
-              <Input type="textarea" name="textarea" id="body" disabled defaultValue={this.state.post[0]['Body']}/>
-            </InputGroup>
-          </Form>
+          <Row>
+            <Col sm={{ size: 4, order: 2, offset: 1 }}>
+              <Form>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>Title</InputGroupText>
+                  </InputGroupAddon>
+                  <Input id="title" type='text' disabled defaultValue={this.state.post[0]['Title']}/>
+                </InputGroup>
+                <div style={{height: '0.4em'}}/>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>Body</InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="textarea" name="textarea" id="body" disabled defaultValue={this.state.post[0]['Body']}/>
+                </InputGroup>
+              </Form>
+            </Col>
+          </Row>
         </div>
       );
     }
