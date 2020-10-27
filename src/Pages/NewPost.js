@@ -3,7 +3,6 @@ import {Label, Button, InputGroupAddon, InputGroupText, Input, InputGroup, Form,
 import axios from "axios";
 import history from "../history";
 import { Editor } from '@tinymce/tinymce-react';
-import "./NewPost.css";
 
 class NewPost extends Component {
 

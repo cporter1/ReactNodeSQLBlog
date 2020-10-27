@@ -43,7 +43,7 @@ class Home extends Component {
       if(this.state.postID){
 
         return (
-          <div className='Home'>
+          <div>
             <Label>Viewing Post!</Label>
             <ViewPost postID={this.state.postID}/>
           </div>
@@ -52,7 +52,7 @@ class Home extends Component {
       } else {
 
         return(
-          <div className='Home'>
+          <div>
             <PostTable posts={this.state.posts}/>
             <Button onClick={this.createPost}>Create Post</Button>
           </div>
@@ -60,7 +60,7 @@ class Home extends Component {
       }
     } else {
       return (
-        <div className='Home'>
+        <div>
           <Label>Loading...</Label>
         </div>
       )

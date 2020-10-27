@@ -1,12 +1,12 @@
 import React from "react";
 import {Router, Switch, Route, useParams} from "react-router-dom";
-import './App.css';
 import CreateAccount from "./Pages/CreateAccount";
 import SignIn from "./Pages/SignIn";
 import Header from "./Pages/Header";
 import Home from "./Pages/Home";
 import NewPost from "./Pages/NewPost";
 import history from './history';
+import './styles/style.css';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -20,51 +20,53 @@ function isSignedIn() {
 function App() {
 
   return (
-    <div className='App'>
-      <Router history={history}>
-        <Header />
+    <div className='background'>
+      <div className='app center'>
+        <Router history={history}>
+          <Header />
 
-        <Switch>
+          <Switch>
 
-          <Route path={'/home'} render={() => (
-            isSignedIn()
-              ? <Home username={sessionStorage.getItem('username')}/>
-              : <SignIn/>
-          )}/>
+            <Route path={'/home'} render={() => (
+              isSignedIn()
+                ? <Home username={sessionStorage.getItem('username')}/>
+                : <SignIn/>
+            )}/>
 
-          <Route path={'/post/:postID'} render={(post) => (
-            isSignedIn()
-              ? <Home postID={post.match.params.postID}/>
-              : <SignIn/>
-          )}/>
+            <Route path={'/post/:postID'} render={(post) => (
+              isSignedIn()
+                ? <Home postID={post.match.params.postID}/>
+                : <SignIn/>
+            )}/>
 
-          <Route path={'/new-post'} render={() => (
-            isSignedIn()
-              ? <NewPost username={sessionStorage.getItem('username')}/>
-              : <SignIn/>
-          )}/>
+            <Route path={'/new-post'} render={() => (
+              isSignedIn()
+                ? <NewPost username={sessionStorage.getItem('username')}/>
+                : <SignIn/>
+            )}/>
 
-          <Route path={'/sign-in'} render={() => (
-            isSignedIn()
-              ? <Home username={sessionStorage.getItem('username')}/>
-              : <SignIn/>
-          )}/>
+            <Route path={'/sign-in'} render={() => (
+              isSignedIn()
+                ? <Home username={sessionStorage.getItem('username')}/>
+                : <SignIn/>
+            )}/>
 
-          <Route path={'/create-account'} render={() => (
-            isSignedIn()
-              ? <Home username={sessionStorage.getItem('username')}/>
-              : <CreateAccount/>
-          )}/>
+            <Route path={'/create-account'} render={() => (
+              isSignedIn()
+                ? <Home username={sessionStorage.getItem('username')}/>
+                : <CreateAccount/>
+            )}/>
 
-          <Route path={'/'} render={() => (
-            isSignedIn()
-              ? <Home username={sessionStorage.getItem('username')}/>
-              : <SignIn/>
-          )}/>
+            <Route path={'/'} render={() => (
+              isSignedIn()
+                ? <Home username={sessionStorage.getItem('username')}/>
+                : <SignIn/>
+            )}/>
 
-        </Switch>
+          </Switch>
 
-      </Router>
+        </Router>
+      </div>
     </div>
   );
 }
