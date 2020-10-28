@@ -1,59 +1,42 @@
-import React, {Component} from 'react';
-import {Navbar, NavbarBrand, NavItem, Nav, NavLink} from 'reactstrap';
+import React from 'react';
 import SignIn from "./SignIn";
-import history from '../history';
 
-class Header extends Component {
+const Header = ({isSignedIn, signOut, username}) => {
+  return (
+    <div className='header'>
 
-  signOut = () => {
-    sessionStorage.removeItem('username');
-    history.push('/home');
-    window.location.reload(false);
-  };
+      <a href={'/home'} style={{textDecoration: 'none', color: 'black'}}>
+        <h1 className='title'>Reddit SQL Clone</h1>
+      </a>
 
-  render() {
+        {isSignedIn() ? (
+          <div style={{marginLeft: '500px', marginRight:'0', marginTop: '30px'}}>
+            <a href={'/profile'} style={{textDecoration: 'none', color: 'black'}}>
+              <h3>{username}</h3>
+            </a>
+          </div>
+        ) : (
+          <div style={{marginLeft: '80px', marginRight:'0', marginTop: '35px'}}>
+            <a href={'/create-account'} style={{ textDecoration: 'none', color: 'black'}}>
+              <h3>Create Account</h3>
+            </a>
+          </div>
+        )}
 
-    return (
-      <div className='header'>
-        <Navbar light expand="md">
-          <NavbarBrand href='/home'><h1>Reddit SQL Clone</h1></NavbarBrand>
-          <Nav className='ml-auto' navbar>
-            <NavItem>
-              {this.props.isSignedIn
-                ?
-                <NavLink href="/profile">
-                  <h4>
-                    {sessionStorage.getItem('username')}
-                  </h4>
-                </NavLink>
-                :
-                <NavLink href="/create-account">
-                  <h4>
-                    Create Account
-                  </h4>
-                </NavLink>
-              }
-            </NavItem>
-            <NavItem>
-              {this.props.isSignedIn
-                ?
-                <NavLink href="/home" onClick={this.signOut}>
-                  <h4>
-                    Sign Out
-                  </h4>
-                </NavLink>
-                :
-                <div>
-                  <SignIn />
-                </div>
-              }
-            </NavItem>
-          </Nav>
-        </Navbar>
-      </div>
-    );
-  }
+      {isSignedIn() ? (
+        <div className='right'>
+          <a onClick={signOut} href={'/home'} style={{textDecoration: 'none', color: 'black'}}>
+            <h3 style={{marginRight:'20px', marginTop: '30px'}}>Sign Out</h3>
+          </a>
+        </div>
+      ) : (
+        <div className='right'>
+          <SignIn />
+        </div>
+      )}
 
-}
+    </div>
+  );
+};
 
 export default Header;

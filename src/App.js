@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import {Router, Switch, Route, useParams} from "react-router-dom";
 import CreateAccount from "./Pages/CreateAccount";
 import SignIn from "./Pages/SignIn";
@@ -11,59 +11,67 @@ import './styles/style.css';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-//Function to check if the user is logged in
-//Returns true if username is found in session storage, false if not
-function isSignedIn() {
-  let username = sessionStorage.getItem('username');
-  return (username !== '' && username !== null);
-}
+class App extends Component {
 
-function App() {
+  //Function to check if the user is logged in
+  //Returns true if username is found in session storage, false if not
+  isSignedIn = () => {
+    let username = sessionStorage.getItem('username');
+    return (username !== '' && username !== null);
+  };
 
-  return (
-    <div className='background'>
-      <div className='app center'>
-        <Router history={history}>
-          <Header isSignedIn={isSignedIn()}/>
+  signOut = () => {
+    sessionStorage.removeItem('username');
+    history.push('/home');
+    window.location.reload(false);
+  };
 
-          <Switch>
+  render(){
+    return (
+      <div className='background'>
+        <div className='app center'>
+          <Router history={history}>
+            <Header isSignedIn={this.isSignedIn} signOut={this.signOut} username={sessionStorage.getItem('username')}/>
 
-            <Route path={'/home'} render={() => (
-              <Home username={sessionStorage.getItem('username')}/>
-            )}/>
+            <Switch>
 
-            <Route path={'/profile'} render={() => (
-              isSignedIn()
-                ? <Profile username={sessionStorage.getItem('username')}/>
-                : <CreateAccount/>
-            )}/>
+              <Route path={'/home'} render={() => (
+                <Home username={sessionStorage.getItem('username')}/>
+              )}/>
 
-            <Route path={'/post/:postID'} render={(post) => (
-              <Home postID={post.match.params.postID}/>
-            )}/>
+              <Route path={'/profile'} render={() => (
+                this.isSignedIn()
+                  ? <Profile username={sessionStorage.getItem('username')}/>
+                  : <CreateAccount/>
+              )}/>
 
-            <Route path={'/new-post'} render={() => (
-              isSignedIn()
-                ? <NewPost username={sessionStorage.getItem('username')}/>
-                : <CreateAccount/>
-            )}/>
+              <Route path={'/post/:postID'} render={(post) => (
+                <Home postID={post.match.params.postID}/>
+              )}/>
 
-            <Route path={'/create-account'} render={() => (
-              isSignedIn()
-                ? <Home username={sessionStorage.getItem('username')}/>
-                : <CreateAccount/>
-            )}/>
+              <Route path={'/new-post'} render={() => (
+                this.isSignedIn()
+                  ? <NewPost username={sessionStorage.getItem('username')}/>
+                  : <CreateAccount/>
+              )}/>
 
-            <Route path={'/'} render={() => (
-              <Home username={sessionStorage.getItem('username')}/>
-            )}/>
+              <Route path={'/create-account'} render={() => (
+                this.isSignedIn()
+                  ? <Home username={sessionStorage.getItem('username')}/>
+                  : <CreateAccount/>
+              )}/>
 
-          </Switch>
+              <Route path={'/'} render={() => (
+                <Home username={sessionStorage.getItem('username')}/>
+              )}/>
 
-        </Router>
+            </Switch>
+
+          </Router>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

@@ -14,12 +14,17 @@
 
 .header {
     background: #D3D3D3;
-    height: 100px;
+    height: fit-content;
     margin: 0;
+    padding: 10px 10px 20px 10px;
     border-style: solid;
     border-color: black;
     border-width: 0 4px 4px 0;
     display: flex;
+}
+
+.header_right {
+    border-right: 120px solid #D3D3D3;
 }
 
 .app {
@@ -36,12 +41,11 @@
 }
 
 .sign-in-box {
-    width: 200px;
-    height: 80px;
     margin: 10px;
     border-style: solid;
     border-color: black;
-    border-width: 4px;
+    border-width: 0 4px 4px 0;
+    display: flex;
 }
 
 .profile {
@@ -56,18 +60,37 @@
     margin-top: 10px;
 }
 
-.prepend {
-    width: 100px;
-}
-
 .padding {
     padding: 10px;
 }
 
 .small-input {
-    font-size: 10px;
+    font-size: 5px;
     background-color: #365090;
     padding: 2px 5px;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 15px 10px 10px 25px;
+    cursor: pointer;
+}
+
+.border {
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
+}
+
+.right {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.left {
+    margin-left: 0;
+    margin-right: auto;
 }
 
 input[type="text"] {
@@ -78,10 +101,10 @@ input[type="password"] {
     font-size: 15px;
 }
 
-h1:hover {
+h3:hover {
     color: #F5F5F5;
 }
 
-h4:hover {
+h1:hover {
     color: #F5F5F5;
 }
