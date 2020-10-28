@@ -5,6 +5,7 @@ import SignIn from "./Pages/SignIn";
 import Header from "./Pages/Header";
 import Home from "./Pages/Home";
 import NewPost from "./Pages/NewPost";
+import Profile from "./Pages/Profile";
 import history from './history';
 import './styles/style.css';
 
@@ -23,32 +24,28 @@ function App() {
     <div className='background'>
       <div className='app center'>
         <Router history={history}>
-          <Header />
+          <Header isSignedIn={isSignedIn()}/>
 
           <Switch>
 
             <Route path={'/home'} render={() => (
+              <Home username={sessionStorage.getItem('username')}/>
+            )}/>
+
+            <Route path={'/profile'} render={() => (
               isSignedIn()
-                ? <Home username={sessionStorage.getItem('username')}/>
-                : <SignIn/>
+                ? <Profile username={sessionStorage.getItem('username')}/>
+                : <CreateAccount/>
             )}/>
 
             <Route path={'/post/:postID'} render={(post) => (
-              isSignedIn()
-                ? <Home postID={post.match.params.postID}/>
-                : <SignIn/>
+              <Home postID={post.match.params.postID}/>
             )}/>
 
             <Route path={'/new-post'} render={() => (
               isSignedIn()
                 ? <NewPost username={sessionStorage.getItem('username')}/>
-                : <SignIn/>
-            )}/>
-
-            <Route path={'/sign-in'} render={() => (
-              isSignedIn()
-                ? <Home username={sessionStorage.getItem('username')}/>
-                : <SignIn/>
+                : <CreateAccount/>
             )}/>
 
             <Route path={'/create-account'} render={() => (
@@ -58,9 +55,7 @@ function App() {
             )}/>
 
             <Route path={'/'} render={() => (
-              isSignedIn()
-                ? <Home username={sessionStorage.getItem('username')}/>
-                : <SignIn/>
+              <Home username={sessionStorage.getItem('username')}/>
             )}/>
 
           </Switch>

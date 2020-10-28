@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "../styles/style.css";
 
 class Profile extends Component {
 
@@ -10,7 +11,13 @@ class Profile extends Component {
     }
   }
 
-
+  render() {
+    return (
+      <div className='profile'>
+        <p>Hello</p>
+      </div>
+    );
+  }
 
 }
 

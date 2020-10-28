@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button, Alert} from 'reactstrap';
+import {Form, Input, Button, Alert} from 'reactstrap';
 import history from '../history';
 import axios from "axios";
 import "../styles/style.css";
@@ -79,30 +79,18 @@ class SignIn extends Component {
   render(){
 
     return(
-      <div className='input-small'>
-
-        <Label>Sign In</Label>
+      <div className='sign-in-box'>
 
         <Form onSubmit={this.onSubmit}>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Email</InputGroupText>
-            </InputGroupAddon>
-            <Input id="email" type='text' placeholder="Email" />
-          </InputGroup>
+          <Input className='small-input' size='sm' id="email" type='text' placeholder="Email" />
           <div style={{height: '0.4em'}}/>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Password</InputGroupText>
-            </InputGroupAddon>
-            <Input id="password" type="password" placeholder="Password" />
-          </InputGroup>
+          <Input className='small-input' size='sm' id="password" type="password" placeholder="Password" />
           <div style={{height: '0.4em'}}/>
           <Alert color="danger" isOpen={this.state.error_visible} toggle={this.onDismiss}>
             {this.state.error_message}
           </Alert>
           <div style={{height: '0.4em'}}/>
-          <Button>Sign In</Button>
+          <Button>Submit</Button>
         </Form>
       </div>
     );

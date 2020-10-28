@@ -4,7 +4,7 @@ import history from "../history";
 import PostTable from "./PostTable";
 import ViewPost from "./ViewPost";
 import axios from "axios";
-import "./Home";
+import "../styles/style.css";
 
 class Home extends Component {
 
@@ -44,7 +44,6 @@ class Home extends Component {
 
         return (
           <div>
-            <Label>Viewing Post!</Label>
             <ViewPost postID={this.state.postID}/>
           </div>
         )
@@ -52,7 +51,7 @@ class Home extends Component {
       } else {
 
         return(
-          <div>
+          <div className='posts'>
             <PostTable posts={this.state.posts}/>
             <Button onClick={this.createPost}>Create Post</Button>
           </div>
