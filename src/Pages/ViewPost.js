@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Row, Col, Form, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import axios from "axios";
 
 class ViewPost extends Component {
@@ -30,26 +29,21 @@ class ViewPost extends Component {
   render(){
     if(!this.state.loading){
       return(
-        <div>
-          <Row>
-            <Col sm={{ size: 4, order: 2, offset: 1 }}>
-              <Form>
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>Title</InputGroupText>
-                  </InputGroupAddon>
-                  <Input id="title" type='text' disabled defaultValue={this.state.post[0]['Title']}/>
-                </InputGroup>
-                <div style={{height: '0.4em'}}/>
-                <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>Body</InputGroupText>
-                  </InputGroupAddon>
-                  <Input type="textarea" name="textarea" id="body" disabled defaultValue={this.state.post[0]['Body']}/>
-                </InputGroup>
-              </Form>
-            </Col>
-          </Row>
+        <div className='view-post-full-rect'>
+          <div className='post-banner-rect'>
+            <div className='post-banner-text'>
+              <h4>{this.state.post[0]['Title']}</h4>
+              <div className='right'>
+                <a><h4>{this.state.post[0]['Author']}</h4></a>
+              </div>
+            </div>
+          </div>
+
+          <div className='view-post-body-rect'>
+            <div className='view-post-body-text'>
+              <h5>{this.state.post[0]['Body']}</h5>
+            </div>
+          </div>
         </div>
       );
     }

@@ -7,7 +7,7 @@ const PostBanner = ({title, author, index, goToPost}) => {
       <div className='post-banner-text'>
         <a onClick={() => goToPost(index)}><h4>{title}</h4></a>
         <div className='right'>
-          <a onClick={() => goToPost(index)}><h4>{author}</h4></a>
+          <a><h4>{author}</h4></a>
         </div>
       </div>
     </div>

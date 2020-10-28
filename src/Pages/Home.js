@@ -73,7 +73,7 @@ class Home extends Component {
       }
     } else {
       return (
-        <div>
+        <div style={{marginTop: '10px'}}>
           <Label>Loading...</Label>
         </div>
       )
