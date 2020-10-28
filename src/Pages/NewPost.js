@@ -16,7 +16,7 @@ class NewPost extends Component {
   }
 
   getNewCode = () => {
-    return [...Array(8)].map(i=>(~~(Math.random()*36)).toString(36)).join('');
+    return [...Array(6)].map(i=>(~~(Math.random()*36)).toString(36)).join('');
   };
 
   submitPost = (ev) => {

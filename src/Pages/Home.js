@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Label, Button } from 'reactstrap';
 import history from "../history";
-import PostTable from "./PostTable";
 import ViewPost from "./ViewPost";
+import PostBanner from "./PostBanner";
 import axios from "axios";
 import "../styles/style.css";
 
@@ -36,6 +36,16 @@ class Home extends Component {
     window.location.reload(false);
   };
 
+  goToPost = (index) => {
+    let postID = this.getPostID(index);
+    history.push(`/post/${postID}`);
+    window.location.reload(false);
+  };
+
+  getPostID = (index) => {
+    return this.state.posts[index]['PostID'];
+  };
+
   render(){
 
     if(!this.state.loading){
@@ -52,8 +62,12 @@ class Home extends Component {
 
         return(
           <div className='posts'>
-            <PostTable posts={this.state.posts}/>
-            <Button onClick={this.createPost}>Create Post</Button>
+            {this.state.posts.map((key, index) => {
+              return (
+                <PostBanner title={this.state.posts[index]['Title']} author={this.state.posts[index]['Author']} index={index} goToPost={this.goToPost}/>
+              );
+            })}
+            <Button style={{marginTop: '15px'}} onClick={this.createPost}>Create Post</Button>
           </div>
         )
       }

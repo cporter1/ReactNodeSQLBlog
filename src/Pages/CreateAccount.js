@@ -72,10 +72,7 @@ class CreateAccount extends Component {
   render(){
 
     return(
-      <div>
-
-        <Label>Create An Account</Label>
-
+      <div className='create-account'>
         <Form onSubmit={this.onSubmit}>
           <InputGroup>
             <Input class="w-25" id="email" type='text' placeholder="Email" />
