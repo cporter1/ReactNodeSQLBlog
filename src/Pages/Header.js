@@ -6,12 +6,12 @@ import "../css/Header.css";
 class Header extends Component {
 
   isSignedIn() {
-    let username = sessionStorage.getItem('username');
+    let username = sessionStorage.getItem('user');
     return (username !== '' && username !== null);
   }
 
   signOut = () => {
-    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('user');
     history.push('/sign-in');
     window.location.reload(false);
   };

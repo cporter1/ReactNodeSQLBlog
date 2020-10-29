@@ -16,7 +16,6 @@ router
                 if( await bcrypt.compare( req.body.password, result.recordset[0]['password'])) {
 
                     res.send(result.recordset[0]).status(200)
-                    console.log('in if', result)
                 }
                 else {
                     res.sendStatus(401)
