@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Col, Form, Input, Button, Alert} from 'reactstrap';
+import {Form, Input, Button, Alert} from 'reactstrap';
 import history from '../history';
 import axios from "axios";
 import "../styles/style.css";
@@ -80,7 +80,7 @@ class SignIn extends Component {
 
     return(
       <div>
-        <Form onSubmit={this.onSubmit}>
+        <Form onSubmit={this.onSubmit} style={{textAlign: 'right'}}>
           <div className='sign-in-box'>
           <Input className='small-input' size='sm' id="email" type='text' placeholder="Email" />
           <div style={{width: '1em'}}/>
@@ -89,7 +89,7 @@ class SignIn extends Component {
             {this.state.error_message}
           </Alert>
           </div>
-          <Button>Sign In</Button>
+          <Button style={{marginRight: '10px', color: 'white', backgroundColor: '#365090', borderRadius: '6px', borderColor: 'black', borderStyle: 'solid', borderWidth: '0 2px 2px 0'}}>Sign In</Button>
         </Form>
       </div>
     );

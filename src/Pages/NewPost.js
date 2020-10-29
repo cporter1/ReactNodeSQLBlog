@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import {Label, Button, InputGroupAddon, InputGroupText, Input, InputGroup, Form, Alert} from 'reactstrap';
 import axios from "axios";
 import history from "../history";
-import { Editor } from '@tinymce/tinymce-react';
 
 class NewPost extends Component {
 
@@ -32,8 +30,8 @@ class NewPost extends Component {
     let title = ev.target.title.value;
     let body = ev.target.body.value;
 
-    title = title.replace("'", "''");
-    body = body.replace("'", "''");
+    title = title.replace(/'/gi, "''");
+    body = body.replace(/'/gi, "''");
 
     let data = JSON.stringify({
       title: title,
@@ -72,55 +70,10 @@ class NewPost extends Component {
       });
   };
 
-  handleEditorChange = (content, editor) => {
-    console.log('Content was updated:', content);
-  };
-
   render(){
     return(
-      <div className='NewPost'>
-        <Label>Create a New Post</Label>
-        <Form onSubmit={this.submitPost}>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Title</InputGroupText>
-            </InputGroupAddon>
-            <Input id="title" type='text' placeholder="Title" />
-          </InputGroup>
-          <div style={{height: '0.4em'}}/>
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Body</InputGroupText>
-            </InputGroupAddon>
-            <Input type="textarea" name="textarea" id="body" />
-          </InputGroup>
-          <div style={{height: '0.4em'}}/>
-          <Alert color="danger" isOpen={this.state.error_visible} toggle={this.onDismiss}>
-            {this.state.error_message}
-          </Alert>
-          <div style={{height: '0.4em'}}/>
-          <Button type='submit'>Submit Post</Button>
-        </Form>
+      <div />
 
-        <div style={{height: '0.4em'}}/>
-
-        <Editor
-          apiKey='eo1bupzvob80fnuz2iky51mtcakgv8coz2tpamlt4coapd24'
-          initialValue='Hello'
-          init={{
-            height: 500,
-            menubar: false,
-            plugins: [
-              'advlist autolink lists link image charmap print preview anchor',
-              'searchreplace visualblocks code fullscreen',
-              'insertdatetime media table paste code help wordcount'
-            ],
-            toolbar:
-              'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
-          }}
-          onEditorChange={this.handleEditorChange}
-          />
-      </div>
     )
   }
 

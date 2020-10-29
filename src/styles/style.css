@@ -31,7 +31,7 @@
 .app {
     background: #365090;
     width: 1200px;
-    height: 977px;
+    height: 888px;
     max-width: 100%;
     max-height: 100%;
     padding: 10px;
@@ -59,7 +59,8 @@
 }
 
 .posts {
-    margin-top: 10px;
+    width: 60%;
+    display: block;
 }
 
 .padding {
@@ -94,11 +95,9 @@
 .post-banner-rect {
     border-radius: 10px;
     background: #D3D3D3;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+
     padding: 0 auto;
-    width: 60%;
+    width: 100%;
     height: 50px;
     text-align: left;
     display: flex;
@@ -116,7 +115,8 @@
 }
 
 .view-post-full-rect {
-    width: 100%;
+    width: 60%;
+    margin-top: 10px;
     height: fit-content;
     display: block;
 }
@@ -124,9 +124,9 @@
 .view-post-body-rect {
     border-radius: 10px;
     background: #D3D3D3;
-    margin-left: 20px;
+    margin-left: 10px;
     padding: 0 auto;
-    width: calc(60% - 10px);
+    width: calc(100% - 10px);
     height: fit-content;
     text-align: left;
     border-style: solid;
@@ -142,6 +142,35 @@
     /* top, left right, center */
     margin-top: 5px;
     margin-left: 10px;
+    display: flex;
+}
+
+.new-post-box {
+    border-radius: 10px;
+    background: #D3D3D3;
+    margin-left: 10px;
+    padding: 0 auto;
+    /*width: calc(40% - 20px);*/
+    width: calc(40% - 10px);
+    height: fit-content;
+    text-align: center;
+    display: block;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 4px 4px 0;
+}
+
+.new-post-button-area {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 20px;
+}
+
+.home-content {
+    width: 100%;
+    height: fit-content;
+    margin-top: 10px;
     display: flex;
 }
 
@@ -168,7 +197,7 @@ h3:hover {
     cursor: pointer;
 }
 
-h4:hover {
+h4.link:hover {
     color: #F5F5F5;
     cursor: pointer;
 }

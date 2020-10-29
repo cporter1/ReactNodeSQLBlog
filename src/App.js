@@ -1,7 +1,6 @@
 import React, {Component} from "react";
-import {Router, Switch, Route, useParams} from "react-router-dom";
+import {Router, Switch, Route} from "react-router-dom";
 import CreateAccount from "./Pages/CreateAccount";
-import SignIn from "./Pages/SignIn";
 import Header from "./Pages/Header";
 import Home from "./Pages/Home";
 import NewPost from "./Pages/NewPost";

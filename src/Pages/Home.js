@@ -3,6 +3,7 @@ import { Label, Button } from 'reactstrap';
 import history from "../history";
 import ViewPost from "./ViewPost";
 import PostBanner from "./PostBanner";
+import NewPostBox from "./NewPostBox";
 import axios from "axios";
 import "../styles/style.css";
 
@@ -16,7 +17,9 @@ class Home extends Component {
       postID: this.props.postID,
       loading: true,
     };
+  }
 
+  componentDidMount() {
     this.getPosts();
   }
 
@@ -61,14 +64,18 @@ class Home extends Component {
       } else {
 
         return(
-          <div className='posts'>
-            {this.state.posts.map((key, index) => {
-              return (
-                <PostBanner title={this.state.posts[index]['Title']} author={this.state.posts[index]['Author']} index={index} goToPost={this.goToPost}/>
-              );
-            })}
-            <Button style={{marginTop: '15px'}} onClick={this.createPost}>Create Post</Button>
+          <div className='home-content'>
+            <div className='posts'>
+              {this.state.posts.map((key, index) => {
+                return (
+                  <PostBanner key={index} title={this.state.posts[index]['Title']} author={this.state.posts[index]['Author']} index={index} goToPost={this.goToPost}/>
+                );
+              })}
+            </div>
+
+            <NewPostBox newTextPost={this.createPost} newLinkPost={this.createPost}/>
           </div>
+
         )
       }
     } else {

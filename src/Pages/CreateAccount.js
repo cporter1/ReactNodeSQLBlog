@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button, Alert} from 'reactstrap';
+import {Form, Input, InputGroup, Button, Alert} from 'reactstrap';
 import axios from 'axios';
 import history from "../history";
 

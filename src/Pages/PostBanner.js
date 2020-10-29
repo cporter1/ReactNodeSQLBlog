@@ -5,9 +5,9 @@ const PostBanner = ({title, author, index, goToPost}) => {
   return (
     <div className='post-banner-rect'>
       <div className='post-banner-text'>
-        <a onClick={() => goToPost(index)}><h4>{title}</h4></a>
+        <h4 onClick={() => goToPost(index)} className='link'>{title}</h4>
         <div className='right'>
-          <a><h4>{author}</h4></a>
+          <h4 className='link'>{author}</h4>
         </div>
       </div>
     </div>
