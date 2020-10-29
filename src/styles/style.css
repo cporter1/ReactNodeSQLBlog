@@ -86,12 +86,6 @@
     justify-content: center;
 }
 
-.border-black {
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
-}
-
 .post-banner-rect {
     border-radius: 10px;
     background: #D3D3D3;
@@ -174,6 +168,37 @@
     display: flex;
 }
 
+.new-post-title-rect {
+    border-radius: 10px;
+    background: #D3D3D3;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    height: fit-content;
+    text-align: left;
+    display: block;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 4px 4px 0;
+}
+
+.new-post-title-text {
+    width: calc(100% - 30px);
+    padding-left: 10px;
+    padding-top: 10px;
+    display: block;
+}
+
+.new-post-body-text {
+    width: calc(100% - 40px);
+    padding-top: 12px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    /* top, left right, center */
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
 .right {
     margin-left: auto;
     margin-right: 0;
@@ -182,6 +207,18 @@
 .left {
     margin-left: 0;
     margin-right: auto;
+}
+
+.border-black {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+.border-white {
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
 }
 
 input[type="text"] {

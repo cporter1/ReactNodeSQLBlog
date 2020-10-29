@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Input, Button, Form} from 'reactstrap';
 import axios from "axios";
 import history from "../history";
 
@@ -72,9 +73,25 @@ class NewPost extends Component {
 
   render(){
     return(
-      <div />
+      <div className='view-post-full-rect'>
+        <Form onSubmit={this.submitPost}>
+          <div className='new-post-title-rect'>
+            <div className='new-post-title-text'>
+              <h4>Title</h4>
+              <Input id='title' style={{marginLeft: '10px'}} size='sm'/>
+            </div>
+          </div>
 
-    )
+          <div className='view-post-body-rect'>
+            <div className='new-post-body-text'>
+              <h5 style={{marginRight: '10px'}}>Body</h5>
+              <Input id='body' style={{marginLeft: '10px', height: '200px'}} size='sm' type='textarea'/>
+              <Button style={{textAlign: 'center', marginTop: '10px', marginLeft: '10px', width: '100%', color: 'white', backgroundColor: '#365090', borderRadius: '6px', borderColor: 'black', borderStyle: 'solid', borderWidth: '0 2px 2px 0'}}>Submit</Button>
+            </div>
+          </div>
+        </Form>
+      </div>
+    );
   }
 
 
