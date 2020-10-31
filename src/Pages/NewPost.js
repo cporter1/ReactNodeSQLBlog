@@ -31,6 +31,7 @@ class NewPost extends Component {
     let title = ev.target.title.value;
     let body = ev.target.body.value;
 
+    //Replaces all ' with '' for SQL Database Storage
     title = title.replace(/'/gi, "''");
     body = body.replace(/'/gi, "''");
 
@@ -73,7 +74,7 @@ class NewPost extends Component {
 
   render(){
     return(
-      <div className='view-post-full-rect'>
+      <div className='view-post-rect'>
         <Form onSubmit={this.submitPost}>
           <div className='new-post-title-rect'>
             <div className='new-post-title-text'>

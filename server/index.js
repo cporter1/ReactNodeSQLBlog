@@ -142,6 +142,24 @@ app.post("/newPost", function (req, res) {
   });
 });
 
+app.post("/newComment", function (req, res) {
+  sql.connect(config, function (err) {
+    if (err) console.log(err);
+
+    let request = new sql.Request();
+    let query = `INSERT INTO Comments VALUES ('${req.body.body}', '${req.body.author}', '${req.body.timePosted}', '${req.body.parentID}', '${req.body.commentID}')`;
+
+    // query to the database and get the records
+    request.query(query, function (err, response) {
+
+      if (err) console.log(err);
+
+      // Account successfully created
+      res.send(response);
+    });
+  });
+});
+
 app.get("/getPosts", (req, res) => {
 
   // connect to your database
@@ -153,7 +171,7 @@ app.get("/getPosts", (req, res) => {
     let request = new sql.Request();
 
     // query to the database and get the records
-    request.query('SELECT * FROM Posts', function (err, response) {
+    request.query('SELECT * FROM Posts ORDER BY TimePosted', function (err, response) {
 
       if (err) console.log(err);
 
@@ -175,6 +193,27 @@ app.get('/post/:postID', function (req, res) {
 
     // query to the database and get the records
     request.query(`SELECT * FROM Posts WHERE PostID = '${req.params['postID']}'`, function (err, response) {
+
+      if (err) console.log(err);
+
+      // send records as a response
+      res.send(response.recordset);
+
+    });
+  });
+});
+
+app.get('/comments/:postID', function (req, res) {
+
+  sql.connect(config, function (err) {
+
+    if (err) console.log(err);
+
+    // create Request object
+    let request = new sql.Request();
+
+    // query to the database and get the records
+    request.query(`SELECT * FROM Comments WHERE ParentID = '${req.params['postID']}'`, function (err, response) {
 
       if (err) console.log(err);
 

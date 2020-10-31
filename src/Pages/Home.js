@@ -57,7 +57,7 @@ class Home extends Component {
 
         return (
           <div>
-            <ViewPost postID={this.state.postID}/>
+            <ViewPost username={this.props.username} postID={this.state.postID}/>
           </div>
         )
 

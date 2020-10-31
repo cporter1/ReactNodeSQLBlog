@@ -47,7 +47,7 @@ class App extends Component {
               )}/>
 
               <Route path={'/post/:postID'} render={(post) => (
-                <Home postID={post.match.params.postID}/>
+                <Home username={sessionStorage.getItem('username')} postID={post.match.params.postID}/>
               )}/>
 
               <Route path={'/new-post'} render={() => (
