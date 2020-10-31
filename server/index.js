@@ -147,7 +147,7 @@ app.post("/newComment", function (req, res) {
     if (err) console.log(err);
 
     let request = new sql.Request();
-    let query = `INSERT INTO Comments VALUES ('${req.body.body}', '${req.body.author}', '${req.body.timePosted}', '${req.body.parentID}', '${req.body.commentID}')`;
+    let query = `INSERT INTO Comments VALUES ('${req.body.body}', '${req.body.author}', '${req.body.timePosted}', '${req.body.parentID}', '${req.body.commentID}', '${req.body.postID}', '${req.body.depth}')`;
 
     // query to the database and get the records
     request.query(query, function (err, response) {
@@ -213,7 +213,7 @@ app.get('/comments/:postID', function (req, res) {
     let request = new sql.Request();
 
     // query to the database and get the records
-    request.query(`SELECT * FROM Comments WHERE ParentID = '${req.params['postID']}'`, function (err, response) {
+    request.query(`SELECT * FROM Comments WHERE PostID = '${req.params['postID']}'`, function (err, response) {
 
       if (err) console.log(err);
 

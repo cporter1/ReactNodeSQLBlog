@@ -46,6 +46,8 @@ class ReplyBox extends Component {
       timePosted: timePosted,
       parentID: this.props.postID,
       commentID: this.getNewCode(),
+      postID: this.props.postID,
+      depth: 0,
     });
 
     axios.post('http://10.0.0.97:3001/newComment', data, {
