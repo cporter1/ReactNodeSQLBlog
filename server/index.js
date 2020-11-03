@@ -213,7 +213,7 @@ app.get('/comments/:postID', function (req, res) {
     let request = new sql.Request();
 
     // query to the database and get the records
-    request.query(`SELECT * FROM Comments WHERE PostID = '${req.params['postID']}'`, function (err, response) {
+    request.query(`SELECT * FROM Comments WHERE PostID = '${req.params['postID']}' ORDER BY TimePosted`, function (err, response) {
 
       if (err) console.log(err);
 

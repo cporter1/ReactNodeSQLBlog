@@ -16,6 +16,8 @@ class ViewPost extends Component {
       bodyExists: true,
       username: this.props.username,
       openComment: '',
+      postID: this.props.postID,
+      orderedComments: [],
     };
   }
 
@@ -50,8 +52,8 @@ class ViewPost extends Component {
     axios.get(`http://10.0.0.97:3001/comments/${this.props.postID}`).then(response => {
       this.setState({
         comments: response.data,
-        loading: false,
       });
+      this.orderComments();
     }).catch(error => {
       console.log(error);
     });
@@ -74,11 +76,11 @@ class ViewPost extends Component {
   };
 
   getCommentIDFromIndex = (index) => {
-    return this.state.comments[index]['CommentID'];
+    return this.state.orderedComments[index]['CommentID'];
   };
 
   getDepthFromIndex = (index) => {
-    return this.state.comments[index]['Depth'];
+    return this.state.orderedComments[index]['Depth'];
   };
 
   submitReply = (ev) => {
@@ -134,6 +136,35 @@ class ViewPost extends Component {
       });
   };
 
+  //HELPER FUNCTION FOR ORDERING THE COMMENTS
+  //returns all comments with the given parentID
+  getChildren = (parentID) => {
+    let children = [];
+    for(let i = 0; i < this.state.comments.length; i++){
+      if(this.state.comments[i]['ParentID'] === parentID){
+        children.push(this.state.comments[i]);
+        children = children.concat(this.getChildren(this.state.comments[i]['CommentID']));
+      }
+    }
+    return children;
+  };
+
+  //Orders comments by child/parent and time posted
+  orderComments = () => {
+    let orderedComments = [];
+    for(let i = 0; i < this.state.comments.length; i++){
+      if(this.state.comments[i]['ParentID'] === this.state.postID){
+        orderedComments.push(this.state.comments[i]);
+        orderedComments = orderedComments.concat(this.getChildren(this.state.comments[i]['CommentID']));
+      }
+    }
+
+    this.setState({
+      loading: false,
+      orderedComments: orderedComments,
+    });
+  };
+
   render(){
     if(!this.state.loading){
       return(
@@ -168,9 +199,9 @@ class ViewPost extends Component {
               <b style={{padding: '10px', marginLeft: '20px', color: 'white', marginBottom: '0'}}>Comments</b>
           </div>
 
-          {this.state.comments.map((key, index) => {
+          {this.state.orderedComments.map((key, index) => {
             return (
-              <Comment key={index} i={index} offset={this.getDepthFromIndex(index)} submitReply={this.submitReply} commentIsOpen={this.commentIsOpen(index)} openReply={this.openCommentReply} body={this.state.comments[index]['Body']} author={this.state.comments[index]['Author']}/>
+              <Comment key={index} i={index} offset={this.getDepthFromIndex(index)} submitReply={this.submitReply} commentIsOpen={this.commentIsOpen(index)} openReply={this.openCommentReply} body={this.state.orderedComments[index]['Body']} author={this.state.orderedComments[index]['Author']}/>
             );
           })}
 
