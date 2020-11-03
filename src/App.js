@@ -40,9 +40,9 @@ class App extends Component {
                 <Home username={sessionStorage.getItem('username')}/>
               )}/>
 
-              <Route path={'/profile'} render={() => (
+              <Route path={'/profile/:username'} render={(profile) => (
                 this.isSignedIn()
-                  ? <Profile username={sessionStorage.getItem('username')}/>
+                  ? <Profile username={sessionStorage.getItem('username')} profile={profile.match.params.username}/>
                   : <CreateAccount/>
               )}/>
 

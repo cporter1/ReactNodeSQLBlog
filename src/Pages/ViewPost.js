@@ -137,7 +137,7 @@ class ViewPost extends Component {
   };
 
   //HELPER FUNCTION FOR ORDERING THE COMMENTS
-  //returns all comments with the given parentID
+  //returns ordered list of all comments underneath comment with parentID
   getChildren = (parentID) => {
     let children = [];
     for(let i = 0; i < this.state.comments.length; i++){
@@ -165,6 +165,18 @@ class ViewPost extends Component {
     });
   };
 
+  goToPostAuthor = () => {
+    let author = this.state.post[0]['Author'];
+    history.push(`/profile/${author}`);
+    window.location.reload(false);
+  };
+
+  goToCommentAuthor = (index) => {
+    let author = this.state.orderedComments[index]['Author'];
+    history.push(`/profile/${author}`);
+    window.location.reload(false);
+  };
+
   render(){
     if(!this.state.loading){
       return(
@@ -175,7 +187,7 @@ class ViewPost extends Component {
                 <div className='post-banner-text'>
                   <h4 style={{cursor: 'default'}}>{this.state.post[0]['Title']}</h4>
                   <div className='right'>
-                    <h4 className='link'>{this.state.post[0]['Author']}</h4>
+                    <h4 onClick={this.goToPostAuthor} className='link'>{this.state.post[0]['Author']}</h4>
                   </div>
                 </div>
               </div>
@@ -195,13 +207,14 @@ class ViewPost extends Component {
             <ReplyBox postID={this.state.post[0]['PostID']} username={this.props.username}/>
 
           </div>
+
           <div className='page-divider'>
               <b style={{padding: '10px', marginLeft: '20px', color: 'white', marginBottom: '0'}}>Comments</b>
           </div>
 
           {this.state.orderedComments.map((key, index) => {
             return (
-              <Comment key={index} i={index} offset={this.getDepthFromIndex(index)} submitReply={this.submitReply} commentIsOpen={this.commentIsOpen(index)} openReply={this.openCommentReply} body={this.state.orderedComments[index]['Body']} author={this.state.orderedComments[index]['Author']}/>
+              <Comment key={index} i={index} offset={this.getDepthFromIndex(index)} submitReply={this.submitReply} commentIsOpen={this.commentIsOpen(index)} openReply={this.openCommentReply} body={this.state.orderedComments[index]['Body']} author={this.state.orderedComments[index]['Author']} loadReply={true} goToAuthor={this.goToCommentAuthor}/>
             );
           })}
 

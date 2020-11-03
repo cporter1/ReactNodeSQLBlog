@@ -223,6 +223,27 @@ app.get('/comments/:postID', function (req, res) {
     });
   });
 });
+
+app.get('/profile/:username', function (req, res) {
+
+  sql.connect(config, function (err) {
+
+    if (err) console.log(err);
+    let request = new sql.Request();
+
+    // query to the database and get the records
+    request.query(`SELECT [Title], [Author], [Body], [TimePosted], [PostID], NULL AS [ParentID], NULL AS [CommentID], NULL AS [Depth] FROM Posts WHERE Author='${req.params['username']}' 
+                   UNION All
+                   SELECT NULL AS [Title], [Author], [Body], [TimePosted], [PostID], [ParentID], [CommentID], [Depth] From Comments WHERE Author='${req.params['username']}'
+                   ORDER BY TimePosted DESC;`,
+      function (err, response) {
+
+      if (err) console.log(err);
+
+      res.send(response.recordset);
+    });
+  });
+});
   
 app.get("/", (req, res) => {
   res.send("homepage");

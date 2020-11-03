@@ -49,6 +49,16 @@ class Home extends Component {
     return this.state.posts[index]['PostID'];
   };
 
+  goToAuthor = (index) => {
+    let author = this.getAuthor(index);
+    history.push(`/profile/${author}`);
+    window.location.reload(false);
+  };
+
+  getAuthor = (index) => {
+    return this.state.posts[index]['Author'];
+  };
+
   render(){
 
     if(!this.state.loading){
@@ -68,7 +78,7 @@ class Home extends Component {
             <div className='posts'>
               {this.state.posts.map((key, index) => {
                 return (
-                  <PostBanner key={index} title={this.state.posts[index]['Title']} author={this.state.posts[index]['Author']} index={index} goToPost={this.goToPost}/>
+                  <PostBanner key={index} title={this.state.posts[index]['Title']} author={this.state.posts[index]['Author']} index={index} goToPost={this.goToPost} goToAuthor={this.goToAuthor}/>
                 );
               })}
             </div>

@@ -11,7 +11,7 @@ const Header = ({isSignedIn, signOut, username}) => {
 
         {isSignedIn() ? (
           <div style={{marginLeft: '470px', marginRight:'0', marginTop: '30px'}}>
-            <a href={'/profile'} style={{textDecoration: 'none', color: 'black'}}>
+            <a href={'/profile/' + username} style={{textDecoration: 'none', color: 'black'}}>
               <h3>{username}</h3>
             </a>
           </div>

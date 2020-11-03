@@ -52,11 +52,8 @@
 }
 
 .profile {
-    font-size: 100px;
-    width: 600px;
-    background: aqua;
+    width: 100%;
     margin-top: 10px;
-    padding: 10px;
 }
 
 .posts {
@@ -267,7 +264,7 @@
     height: fit-content;
     /* top, left right, center */
     margin-left: 10px;
-    margin-top: 5px;
+    margin-top: 0;
     margin-right: 10px;
     padding: 10px 25px 0 10px;
     display: flex;

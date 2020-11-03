@@ -2,18 +2,23 @@ import React from 'react';
 import '../styles/style.css'
 import {Button, Form, Input} from "reactstrap";
 
-const Comment = ({i, commentIsOpen, body, author, goToAuthor, timePosted, offset, openReply, submitReply}) => {
+const Comment = ({i, commentIsOpen, body, author, goToAuthor, timePosted, offset, openReply, submitReply, loadReply}) => {
   return (
     <div className='comment-rect' style={{marginLeft: offset * 20 + 'px'}}>
       <div className='comment-text'>
         <h5>{body}</h5>
         <div className='right'>
-          <h5 className='link'>{author}</h5>
+          <h5 onClick={() => goToAuthor(i)} className='link'>{author}</h5>
         </div>
       </div>
-      <div className='comment-reply'>
-        <button className='link' onClick={() => openReply(i)}><p style={{height: '25px', margin: '0', padding: '0'}}>Reply</p></button>
-      </div>
+      {loadReply
+        ?
+        <div className='comment-reply'>
+          <button className='link' onClick={() => openReply(i)}><p style={{height: '25px', margin: '0', padding: '0'}}>Reply</p></button>
+        </div>
+        :
+        <div/>
+      }
       {commentIsOpen
         ?
         <div className='comment-text-area'>
