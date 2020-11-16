@@ -1,10 +1,9 @@
-import axios from "axios";
+import app from '../config/axiosConfig.js'
 
 const API_URL = 'http://10.0.0.164:3001/';
 
-
 function login(email, password) {
-    return axios
+    return app
         .post(API_URL + "users/login", {
             email,
             password
@@ -26,7 +25,7 @@ function logout() {
 }
 
 function register(username, email, password) {
-    return axios.post(API_URL + "users/createaccount", {
+    return app.post(API_URL + "users/createaccount", {
         username,
         email,
         password

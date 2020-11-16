@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Form, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Button} from 'reactstrap';
-import axios from 'axios';
 import history from "../history";
 import { register } from '../services/auth.service';
 //import "./CreateAccount.css";

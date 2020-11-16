@@ -29,7 +29,7 @@ function App() {
 
               <Route path={'/home'} render={() => (
                 isSignedIn()
-                  ? <Home user={sessionStorage.getItem('user')}/>
+                  ? <Home user={sessionStorage.getItem('username')}/>
                   : <SignIn/>
               )}/>
 

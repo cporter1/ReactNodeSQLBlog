@@ -9,23 +9,15 @@ class SignIn extends Component {
     super(props);
     this.state = {};
   }
-
-  componentDidMount() {
-    
-  }
-
-
-
+  
   onSubmitLogin = (ev) => {
     ev.preventDefault();
     
     console.log('onSumbitLogin being called', ev.target.email.value,
       ev.target.password.value)
-      
     login(ev.target.email.value, ev.target.password.value)
       .then(response => {
-
-        console.log(response)
+        console.log('resp: ',response)
         if(response.status === 200) {
 
           history.push('/home')
@@ -34,18 +26,13 @@ class SignIn extends Component {
         else if (response.status === 401) {
           console.log('Bad Login')
         }
-
       })
       .catch(err => {
         console.log('Bad Login')
       })
 
   }
-
-
-
   render(){
-    
     return(
       <div className='center'>
         <Label>Sign In!</Label>

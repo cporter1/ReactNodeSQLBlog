@@ -4,17 +4,22 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const DBcalls = require('../tools/sql.requests');
 
-// routes to '/users'
+//middleware to ensure session cookie exists
+const validSession = (req,res,next) => {
+    if(!req.session.email) {
+        res.sendStatus(401)
+    }
+    else {
+        next()
+    }
+}
+// routes to '/users/..'
 router
     .post('/login', async (req,res) => {
-
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        console.log('hashedpassword:   ',hashedPassword)
-
         DBcalls.DBgetAccount(req.body.email)
             .then(async result => {
                 if( await bcrypt.compare( req.body.password, result.recordset[0]['password'])) {
-
+                    req.session.email = req.body.email
                     res.send(result.recordset[0]).status(200)
                 }
                 else {
@@ -29,7 +34,6 @@ router
     .post('/createaccount', async (req, res) => {
         
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        console.log(req.body.username)
         DBcalls.DBcreateAccount(req.body.email, hashedPassword, req.body.username)
             .then(result => {
                 res.sendStatus(201)
@@ -42,7 +46,6 @@ router
                 }
                 res.sendStatus(500);
             })
-        
     });
 
 
