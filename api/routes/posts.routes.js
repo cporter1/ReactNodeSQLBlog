@@ -24,7 +24,7 @@ router
     })
     .get('/getPosts', async (req,res) => {
         DBcalls.DBgetPost()
-            .then(result => {
+            .then(async result => {
                 res.send(result).status(200)
             })
             .catch(err => {
@@ -34,7 +34,7 @@ router
     })
     .get('/post/:postID', async (req,res) => {
         DBcalls.DBgetPost(req.params['postID'])
-            .then(result => {
+            .then(async result => {
                 res.send(result).status(200)
             })
             .catch(err => {
@@ -44,7 +44,7 @@ router
     })
     .get('/comments/:postID', async (req,res) => {
         DBcalls.DBgetComments(req.params['postID'])
-            .then(result => {
+            .then(async result => {
                 res.send(result).status(200)
             })
             .catch(err =>{
@@ -54,7 +54,7 @@ router
     })
     .get('/profile/:username', async (req,res) => {
         DBcalls.DBgetProfile(req.params['username'])
-            .then(result => {
+            .then(async result => {
                 res.send(result).status(200)
             })
             .catch(err => {
