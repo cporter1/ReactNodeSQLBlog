@@ -1,7 +1,6 @@
 const express = require('express');
-const sql = require('mssql');
-const router = express.Router();
-const bcrypt = require('bcrypt');
+const router  = express.Router();
+const bcrypt  = require('bcrypt');
 const DBcalls = require('../tools/sql.requests');
 
 //middleware to ensure session cookie exists
@@ -13,11 +12,11 @@ const validSession = (req,res,next) => {
         next()
     }
 }
-// routes to '/users/..'
+// routes from '/users/...'
 router
     .post('/login', async (req,res) => {
         DBcalls.DBgetAccount(req.body.email)
-            .then(async result => {
+            .then(result => {
                 if( await bcrypt.compare( req.body.password, result.recordset[0]['password'])) {
                     req.session.email = req.body.email
                     res.send(result.recordset[0]).status(200)

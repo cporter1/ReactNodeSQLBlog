@@ -1,11 +1,12 @@
-const express = require('express');
-const session = require('express-session')
-const cors = require('cors');
-const app = express(); // create express app
-const authRoutes = require('./routes/auth.routes'); 
-const port = process.env.port || 3001;
-const bodyParser = require('body-parser');
-const FileStore = require('session-file-store')(session)
+const express     = require('express');
+const session     = require('express-session')
+const cors        = require('cors');
+const app         = express(); // create express app
+const authRoutes  = require('./routes/auth.routes'); 
+const postsRoutes = require('./routes/posts.routes')
+const port        = process.env.port || 3001;
+const bodyParser  = require('body-parser');
+const FileStore   = require('session-file-store')(session)
 
 app.use(cors({
   origin: [
@@ -36,9 +37,10 @@ app.use(
   }
 }))
 
-
 ////   define my routes
 app.use('/users', authRoutes);
+
+app.use('/posts', postsRoutes)
 
 // start express server on the enviroment port or port 3001
 app.listen(port, err  => {
