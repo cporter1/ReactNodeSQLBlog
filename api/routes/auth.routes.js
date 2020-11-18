@@ -16,7 +16,7 @@ const validSession = (req,res,next) => {
 router
     .post('/login', async (req,res) => {
         DBcalls.DBgetAccount(req.body.email)
-            .then(result => {
+            .then(async result => {
                 if( await bcrypt.compare( req.body.password, result.recordset[0]['password'])) {
                     req.session.email = req.body.email
                     res.send(result.recordset[0]).status(200)
