@@ -77,6 +77,19 @@ async function DBgetPost(postID) {
     return data;
 }
 
+async function DBgetComments(postID) {
+    let DBquery = `SELECT * FROM Comments 
+        WHERE PostID = '${postID}' 
+        ORDER BY TimePosted`
+
+    let pool = await sql.connect(DBLogin);
+    let data = await pool.request().query(DBquery);
+    console.log('data: ', data)
+    pool.close;
+    sql.close;      
+    return data;
+}
+
 async function DBgetProfile(profileUserName) {
     let DBquery = `SELECT [Title], [Author], [Body], [TimePosted], [PostID], 
             NULL AS [ParentID], NULL AS [CommentID], NULL AS [Depth] 
@@ -103,4 +116,5 @@ exports.DBcreatePost    = DBcreatePost;
 exports.DBcreateComment = DBcreateComment;
 exports.DBgetAllPosts   = DBgetAllPosts;
 exports.DBgetPost       = DBgetPost;
+exports.DBgetComments   = DBgetComments;
 exports.DBgetProfile    = DBgetProfile;
