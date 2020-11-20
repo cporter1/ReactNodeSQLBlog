@@ -29,18 +29,16 @@ app.use(
     resave: false,
     saveUninitialized: false,
     secret: 'jlkahdfbeulbiadb',
-    store: new FileStore(),
-  
     cookie: {
       maxAge: 2 * 60 * 60 * 1000,
       secure: false,
   }
-}))
+}));
 
 ////   define my routes
 app.use('/users', authRoutes);
-
 app.use('/posts', postsRoutes);
+// app.use('/sessions', SessRoutes)
 
 // start express server on the enviroment port or port 3001
 app.listen(port, err  => {

@@ -104,6 +104,38 @@ async function DBgetProfile(profileUserName) {
     return data.recordset;
 }
 
+async function DBgetSession(sessionID) {
+    let DBquery = `SELECT * FROM Sessions 
+        WHERE sessionID = '${sessionID}'`;
+
+    let pool = await sql.connect(DBLogin);
+    let data = await pool.request().query(DBquery);
+    pool.close;
+    sql.close;
+    return data.recordset;
+}
+
+async function DBsaveSession(sessionID, email) {
+    let DBquery = `INSERT INTO Sessions VALUES ('${sessionID}', '${email}')`;
+
+    let pool = await sql.connect(DBLogin);
+    let data = await pool.request().query(DBquery);
+    pool.close();
+    sql.close();
+    return data.recordset;
+}
+
+async function DBdeleteSession(sessionID) {
+    let DBquery = `DELETE FROM Sessions 
+        WHERE sessionID = '${sessionID}'`;
+
+    let pool = await sql.connect(DBLogin);
+    let data = await pool.request().query(DBquery);
+    pool.close();
+    sql.close();
+    return data.recordset;
+}
+
 //export the DB call functions
 exports.DBgetAccount    = DBgetAccount;
 exports.DBcreateAccount = DBcreateAccount;
@@ -113,3 +145,6 @@ exports.DBgetAllPosts   = DBgetAllPosts;
 exports.DBgetPost       = DBgetPost;
 exports.DBgetComments   = DBgetComments;
 exports.DBgetProfile    = DBgetProfile;
+exports.DBsaveSession   = DBsaveSession;
+exports.DBdeleteSession = DBdeleteSession;
+exports.DBgetSession    = DBgetSession;
