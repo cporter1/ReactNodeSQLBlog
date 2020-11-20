@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-import React from "react";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-import './css/App.css';
-=======
 import React, {Component} from "react";
 import {Router, Switch, Route} from "react-router-dom";
->>>>>>> 0933fe06d7d90e3aa018019d1258b11781e0760e
 import CreateAccount from "./Pages/CreateAccount";
 import Header from "./Pages/Header";
 import Home from "./Pages/Home";
@@ -16,14 +10,6 @@ import './styles/style.css';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-<<<<<<< HEAD
-//Function to check if the user is logged in
-//Returns true if username is found in session storage, false if not
-function isSignedIn() {
-  let user = sessionStorage.getItem('user');
-  return (user !== '' && user !== null);
-}
-=======
 class App extends Component {
 
   //Function to check if the user is logged in
@@ -32,7 +18,6 @@ class App extends Component {
     let username = sessionStorage.getItem('username');
     return (username !== '' && username !== null);
   };
->>>>>>> 0933fe06d7d90e3aa018019d1258b11781e0760e
 
   signOut = () => {
     sessionStorage.removeItem('username');
@@ -50,22 +35,6 @@ class App extends Component {
             <Switch>
 
               <Route path={'/home'} render={() => (
-<<<<<<< HEAD
-                isSignedIn()
-                  ? <Home user={sessionStorage.getItem('username')}/>
-                  : <SignIn/>
-              )}/>
-
-              <Route path={'/sign-in'} render={() => (
-                isSignedIn()
-                  ? <Home user={sessionStorage.getItem('username')}/>
-                  : <SignIn/>
-              )}/>
-
-              <Route path={'/create-account'} render={() => (
-                isSignedIn()
-                  ? <Home user={sessionStorage.getItem('username')}/>
-=======
                 <Home username={sessionStorage.getItem('username')}/>
               )}/>
 
@@ -88,18 +57,11 @@ class App extends Component {
               <Route path={'/create-account'} render={() => (
                 this.isSignedIn()
                   ? <Home username={sessionStorage.getItem('username')}/>
->>>>>>> 0933fe06d7d90e3aa018019d1258b11781e0760e
                   : <CreateAccount/>
               )}/>
 
               <Route path={'/'} render={() => (
-<<<<<<< HEAD
-                isSignedIn()
-                  ? <Home user={sessionStorage.getItem('username')}/>
-                  : <SignIn/>
-=======
                 <Home username={sessionStorage.getItem('username')}/>
->>>>>>> 0933fe06d7d90e3aa018019d1258b11781e0760e
               )}/>
 
             </Switch>

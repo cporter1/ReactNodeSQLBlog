@@ -4,7 +4,7 @@ const cors        = require('cors');
 const app         = express(); // create express app
 const authRoutes  = require('./routes/auth.routes'); 
 const postsRoutes = require('./routes/posts.routes');
-const SessRoutes  = require('./routes/session.routes')
+// const SessRoutes  = require('./routes/session.routes')
 const port        = process.env.port || 3001;
 const bodyParser  = require('body-parser');
 

@@ -5,7 +5,7 @@ const DBcalls = require('../tools/sql.requests');
 
 // routes from '/users/...'
 router
-    .post('/login', async (req,res) => {
+    .post('/signin', async (req,res) => {
         DBcalls.DBgetAccount(req.body.email)
             .then(async result => {
                 if( await bcrypt.compare( req.body.password, 

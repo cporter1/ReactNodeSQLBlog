@@ -12,7 +12,7 @@ async function DBgetAccount(accEmail) {
     return data;
 }
 
-async function DBcreateAccount(accEmail, accPassword, accName,) {
+async function DBcreateAccount(accEmail, accPassword, accName) {
     //create query for this function
     let DBquery = 
         `INSERT INTO Accounts (email, username, password) \
@@ -91,15 +91,47 @@ async function DBgetProfile(profileUserName) {
         SELECT NULL AS [Title], [Author], [Body], [TimePosted], [PostID], 
             [ParentID], [CommentID], [Depth] From Comments 
         WHERE Author='${profileUserName}'
-        ORDER BY TimePosted DESC;`;
+        ORDER BY TimePosted DESC;`
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    pool.close();
-    sql.close();
-
+    pool.close;
+    sql.close;      
     return data.recordset;
 }
+
+async function DBgetSession(sessionID) {
+    let DBquery = `SELECT * FROM Sessions 
+        WHERE sessionID = '${sessionID}'`
+
+    let pool = await sql.connect(DBLogin);
+    let data = await pool.request().query(DBquery);
+    pool.close;
+    sql.close;      
+    return data.recordset;
+}
+
+async function DBsaveSession(sessionID, email) {
+    let DBquery = `INSERT INTO Sessions VALUES ('${sessionID}', '${email}')`
+
+    let pool = await sql.connect(DBLogin);
+    let data = await pool.request().query(DBquery);
+    pool.close;
+    sql.close;      
+    return data.recordset;
+}
+
+async function DBdeleteSession(sessionID) {
+    let DBquery = `DELETE FROM Sessions 
+        WHERE sessionID = '${sessionID}'`
+
+    let pool = await sql.connect(DBLogin);
+    let data = await pool.request().query(DBquery);
+    pool.close;
+    sql.close;      
+    return data.recordset;
+}
+
 
 //export the DB call functions
 exports.DBgetAccount    = DBgetAccount;
