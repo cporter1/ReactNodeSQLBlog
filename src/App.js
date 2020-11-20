@@ -25,8 +25,6 @@ class App extends Component {
     window.location.reload(false);
   };
 
-
-
   render(){
     return (
       <div className='background'>

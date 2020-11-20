@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Input, Button, Form} from 'reactstrap';
 import axios from "axios";
 import history from "../history";
+import { API_Routes } from '../api_routes';
 
 class NewPost extends Component {
 
@@ -43,7 +44,7 @@ class NewPost extends Component {
       postID: this.getNewCode(),
     });
 
-    axios.post('http://10.0.0.97:3001/newPost', data, {
+    axios.post(`${API_Routes.API_POST_URL}/newPost`, data, {
       headers: {
         'Content-Type': 'application/json',
       }

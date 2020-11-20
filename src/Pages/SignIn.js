@@ -3,6 +3,7 @@ import {Form, Input, Button, Alert} from 'reactstrap';
 import history from '../history';
 import axios from "axios";
 import "../styles/style.css";
+import {API_Routes} from "../api_routes";
 
 class SignIn extends Component {
 
@@ -23,7 +24,7 @@ class SignIn extends Component {
       password: ev.target.password.value
     });
 
-    axios.post('http://10.0.0.97:3001/signIn', data, {
+    axios.post(`${API_Routes.API_USER_URL}/signIn`, data, {
       headers: {
         'Content-Type': 'application/json',
       }

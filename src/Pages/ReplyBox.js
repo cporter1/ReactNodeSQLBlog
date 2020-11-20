@@ -3,6 +3,7 @@ import '../styles/style.css';
 import {Button, Input, Form} from "reactstrap";
 import axios from "axios";
 import history from "../history";
+import {API_Routes} from "../api_routes";
 
 class ReplyBox extends Component {
 
@@ -50,7 +51,7 @@ class ReplyBox extends Component {
       depth: 0,
     });
 
-    axios.post('http://10.0.0.97:3001/newComment', data, {
+    axios.post(`${API_Routes.API_POST_URL}/newComment`, data, {
       headers: {
         'Content-Type': 'application/json',
       }

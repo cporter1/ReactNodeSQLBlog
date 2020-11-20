@@ -4,6 +4,7 @@ import {Label} from "reactstrap";
 import Comment from './Comment';
 import ReplyBox from './ReplyBox';
 import history from "../history";
+import {API_Routes} from "../api_routes";
 
 class ViewPost extends Component {
 
@@ -30,7 +31,7 @@ class ViewPost extends Component {
   };
 
   getPost = () => {
-    axios.get(`http://10.0.0.97:3001/post/${this.props.postID}`).then(response => {
+    axios.get(`${API_Routes.API_POST_URL}/post/${this.props.postID}`).then(response => {
       if(response.data[0]['Body'] === ''){
         this.setState({
           bodyExists: false,
@@ -49,7 +50,7 @@ class ViewPost extends Component {
   };
 
   getComments = () => {
-    axios.get(`http://10.0.0.97:3001/comments/${this.props.postID}`).then(response => {
+    axios.get(`${API_Routes.API_POST_URL}/comments/${this.props.postID}`).then(response => {
       this.setState({
         comments: response.data,
       });
@@ -108,7 +109,7 @@ class ViewPost extends Component {
       depth: this.getDepthFromIndex(this.state.openComment) + 1,
     });
 
-    axios.post('http://10.0.0.97:3001/newComment', data, {
+    axios.post(`${API_Routes.API_POST_URL}/newComment`, data, {
       headers: {
         'Content-Type': 'application/json',
       }

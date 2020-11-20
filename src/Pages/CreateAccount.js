@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Form, Input, InputGroup, Button, Alert} from 'reactstrap';
 import axios from 'axios';
 import history from "../history";
+import { API_Routes } from '../api_routes';
 
 class CreateAccount extends Component {
 
@@ -36,7 +37,7 @@ class CreateAccount extends Component {
       password: ev.target.password.value
     });
 
-    axios.post('http://10.0.0.97:3001/createAccount', data, {
+    axios.post(`${API_Routes.API_USER_URL}/createAccount`, data, {
       headers: {
         'Content-Type': 'application/json',
       }

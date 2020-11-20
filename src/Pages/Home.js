@@ -5,6 +5,7 @@ import ViewPost from "./ViewPost";
 import PostBanner from "./PostBanner";
 import NewPostBox from "./NewPostBox";
 import axios from "axios";
+import { API_Routes } from "../api_routes";
 import "../styles/style.css";
 
 class Home extends Component {
@@ -24,7 +25,7 @@ class Home extends Component {
   }
 
   getPosts = () => {
-    axios.get('http://10.0.0.97:3001/getPosts').then(response => {
+    axios.get(`${API_Routes.API_POST_URL}/getPosts`).then(response => {
       this.setState({
         posts: response.data,
         loading: false,
