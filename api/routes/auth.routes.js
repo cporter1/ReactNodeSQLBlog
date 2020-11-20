@@ -33,11 +33,6 @@ router
                 res.sendStatus(201)
             })
             .catch(err => {
-                console.log(' \n \n error: ', err);
-
-                if(err.name === 'RequestError') {
-                    res.sendStatus(409)
-                }
                 res.sendStatus(500);
             })
     });

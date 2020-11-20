@@ -125,7 +125,8 @@ async function DBsaveSession(sessionID, email) {
 }
 
 async function DBdeleteSession(sessionID) {
-    let DBquery = `DELETE FROM Sessions WHERE sessionID = '${sessionID}'`
+    let DBquery = `DELETE FROM Sessions 
+        WHERE sessionID = '${sessionID}'`
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
@@ -145,6 +146,8 @@ exports.DBgetAllPosts   = DBgetAllPosts;
 exports.DBgetPost       = DBgetPost;
 exports.DBgetComments   = DBgetComments;
 exports.DBgetProfile    = DBgetProfile;
-exports.DBgetSession   = DBgetSession;
+exports.DBsaveSession   = DBsaveSession;
+exports.DBdeleteSession = DBdeleteSession;
+exports.DBgetSession    = DBgetSession;
 exports.DBgetProfile    = DBgetProfile;
 exports.DBgetProfile    = DBgetProfile;
