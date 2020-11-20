@@ -10,9 +10,7 @@ router
             .then(async result => {
                 if( await bcrypt.compare( req.body.password, 
                         result.recordset[0]['password'])) {
-                    const user = {'email': result.recordset[0].email, 
-                                  'username' : result.recordset[0].username
-                    }
+                    const user = {'email': result.email}
                     req.session.user = user
                     res.send(result.recordset[0]).status(200)
                 }
