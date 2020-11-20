@@ -15,14 +15,14 @@ async function DBgetAccount(accEmail) {
 async function DBcreateAccount(accEmail, accPassword, accName,) {
     //create query for this function
     let DBquery = 
-        `INSERT INTO users (email, username, password) \
+        `INSERT INTO Accounts (email, username, password) \
         VALUES ('${accEmail}', '${accName}', '${accPassword}')`;
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    pool.close;
-    sql.close;      
-    return data;
+    pool.close();
+    sql.close();
+    return data.recordset;
 }
 
 async function DBcreatePost(postTitle, postAuthor, postBody, postTime, postID) {
@@ -32,23 +32,23 @@ async function DBcreatePost(postTitle, postAuthor, postBody, postTime, postID) {
     
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    pool.close;
-    sql.close;      
-    return data;
+    pool.close();
+    sql.close();
+    return data.recordset;
 }
 
 async function DBcreateComment(commentBody, commentAuthor, 
-    commentTime, commentParentID, commentID, commentDepth) {
+    commentTime, commentParentID, commentID, postID, commentDepth) {
     let DBquery = 
     `INSERT INTO Comments VALUES ('${commentBody}', '${commentAuthor}', 
-        '${commentTime}', '${commentParentID}', '${commentID}', 
-        '${commentDepth}', '${req.body.depth}')`
+        '${commentTime}', '${commentParentID}', '${commentID}', '${postID}', 
+        '${commentDepth}')`;
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    pool.close;
-    sql.close;      
-    return data;
+    pool.close();
+    sql.close();
+    return data.recordset;
 }
 
 async function DBgetAllPosts() {
@@ -56,31 +56,31 @@ async function DBgetAllPosts() {
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    pool.close;
-    sql.close;      
-    return data;
+    pool.close();
+    sql.close();
+    return data.recordset;
 }
 
 async function DBgetPost(postID) {
-    let DBquery = `SELECT * FROM Posts WHERE PostID = '${postID}'`
+    let DBquery = `SELECT * FROM Posts WHERE PostID = '${postID}'`;
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    pool.close;
-    sql.close;      
-    return data;
+    pool.close();
+    sql.close();
+    return data.recordset;
 }
 
 async function DBgetComments(postID) {
     let DBquery = `SELECT * FROM Comments 
         WHERE PostID = '${postID}' 
-        ORDER BY TimePosted`
+        ORDER BY TimePosted`;
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    pool.close;
-    sql.close;      
-    return data;
+    pool.close();
+    sql.close();
+    return data.recordset;
 }
 
 async function DBgetProfile(profileUserName) {
@@ -91,51 +91,15 @@ async function DBgetProfile(profileUserName) {
         SELECT NULL AS [Title], [Author], [Body], [TimePosted], [PostID], 
             [ParentID], [CommentID], [Depth] From Comments 
         WHERE Author='${profileUserName}'
-        ORDER BY TimePosted DESC;`
+        ORDER BY TimePosted DESC;`;
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    pool.close;
-    sql.close;      
+    pool.close();
+    sql.close();
 
-    return data;
+    return data.recordset;
 }
-
-async function DBgetSession(sessionID) {
-    let DBquery = `SELECT * FROM Sessions 
-        WHERE sessionID = '${sessionID}'`
-
-    let pool = await sql.connect(DBLogin);
-    let data = await pool.request().query(DBquery);
-    pool.close;
-    sql.close;      
-
-    return data;
-}
-
-async function DBsaveSession(sessionID, email) {
-    let DBquery = `INSERT INTO Sessions VALUES ('${sessionID}', '${email}')`
-
-    let pool = await sql.connect(DBLogin);
-    let data = await pool.request().query(DBquery);
-    pool.close;
-    sql.close;      
-
-    return data;
-}
-
-async function DBdeleteSession(sessionID) {
-    let DBquery = `DELETE FROM Sessions 
-        WHERE sessionID = '${sessionID}'`
-
-    let pool = await sql.connect(DBLogin);
-    let data = await pool.request().query(DBquery);
-    pool.close;
-    sql.close;      
-
-    return data;
-}
-
 
 //export the DB call functions
 exports.DBgetAccount    = DBgetAccount;

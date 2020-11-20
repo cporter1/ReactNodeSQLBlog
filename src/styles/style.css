@@ -1,0 +1,334 @@
+* {
+    box-sizing: border-box;
+}
+
+.center {
+    text-align: center;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    background: #0e1111;
+}
+
+.header {
+    background: #D3D3D3;
+    height: fit-content;
+    margin: 0;
+    padding: 10px 10px 20px 10px;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 4px 4px 0;
+    border-radius: 10px;
+    display: flex;
+}
+
+.header_right {
+    border-right: 120px solid #D3D3D3;
+}
+
+.app {
+    background: #365090;
+    width: 1200px;
+    height: fit-content;
+    min-height: 1000px;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 10px;
+    margin: 0 auto;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 4px 4px 0;
+}
+
+.sign-in-box {
+    margin: 10px;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 4px 4px 0;
+    border-radius: 10px;
+    display: flex;
+}
+
+.profile {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.posts {
+    width: 60%;
+    display: block;
+}
+
+.padding {
+    padding: 10px;
+}
+
+.small-input {
+    font-size: 5px;
+    background-color: #365090;
+    padding: 2px 5px;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 15px 10px 10px 25px;
+    cursor: pointer;
+}
+
+.create-account {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.post-banner-rect {
+    border-radius: 10px;
+    background: #D3D3D3;
+
+    padding: 0 auto;
+    width: 100%;
+    height: 50px;
+    text-align: left;
+    display: flex;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 4px 4px 0;
+}
+
+.post-banner-text {
+    width: 100%;
+    height: 50px;
+    /* top, left right, center */
+    margin: 7px 15px 10px;
+    display: flex;
+}
+
+.view-post-rect {
+    width: 60%;
+    height: fit-content;
+    display: block;
+}
+
+.view-post-top-content {
+    display: flex;
+}
+
+.view-post-page {
+    width: 100%;
+    margin-top: 10px;
+    height: fit-content;
+}
+
+.view-post-body-rect {
+    border-radius: 10px;
+    background: #D3D3D3;
+    margin-left: 10px;
+    padding: 0 auto;
+    width: calc(100% - 10px);
+    height: fit-content;
+    text-align: left;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 4px 4px 0;
+}
+
+.view-post-body-text {
+    width: fit-content;
+    padding-top: 12px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    /* top, left right, center */
+    margin-top: 5px;
+    margin-left: 10px;
+    display: flex;
+}
+
+.new-post-box {
+    border-radius: 10px;
+    background: #D3D3D3;
+    margin-left: 10px;
+    padding: 0 auto;
+    width: calc(40% - 10px);
+    height: fit-content;
+    text-align: center;
+    display: block;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 4px 4px 0;
+}
+
+.new-post-button-area {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 20px;
+}
+
+.reply-box-area {
+    width: 100%;
+    padding: 20px 40px 20px 20px;
+    display: block;
+    text-align: left;
+}
+
+.home-content {
+    width: 100%;
+    height: fit-content;
+    margin-top: 10px;
+    display: flex;
+}
+
+.new-post-title-rect {
+    border-radius: 10px;
+    background: #D3D3D3;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    height: fit-content;
+    text-align: left;
+    display: block;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 4px 4px 0;
+}
+
+.new-post-title-text {
+    width: calc(100% - 30px);
+    padding-left: 10px;
+    padding-top: 10px;
+    display: block;
+}
+
+.new-post-body-text {
+    width: calc(100% - 40px);
+    padding-top: 12px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    /* top, left right, center */
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.right {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.left {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.border-black {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+.border-white {
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+}
+
+.page-divider {
+    text-align: left;
+    background-color: #0e1111;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: fit-content;
+    width: 100%;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #D3D3D3;
+    border-width: 0 4px 4px 0;
+}
+
+.comment-rect {
+    border-radius: 25px;
+    background: #D3D3D3;
+    padding: 0 auto;
+    height: fit-content;
+    text-align: left;
+    display: block;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 4px 4px 0;
+}
+
+.comment-text {
+    width: 100%;
+    height: fit-content;
+    /* top, left right, center */
+    margin-left: 10px;
+    margin-top: 0;
+    margin-right: 10px;
+    padding: 10px 25px 0 10px;
+    display: flex;
+}
+
+.comment-reply {
+    width: 100%;
+    height: 35px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 20px;
+    display: block;
+}
+
+.comment-text-area {
+    width: 60%;
+    display: block;
+    text-align: left;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+button.link {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*input has OS specific font-family*/
+    margin: 0;
+    color: #069;
+    cursor: pointer;
+    height: 25px;
+}
+
+button.link:focus { outline: none; }
+
+button.link:hover {text-decoration: underline;}
+
+
+input[type="text"] {
+    font-size: 15px;
+}
+
+input[type="password"] {
+    font-size: 15px;
+}
+
+h3:hover {
+    color: #F5F5F5;
+    cursor: pointer;
+}
+
+h4.link:hover {
+    color: #F5F5F5;
+    cursor: pointer;
+}
+
+h5.link:hover {
+    color: #F5F5F5;
+    cursor: pointer;
+}
+
+h1:hover {
+    color: #F5F5F5;
+    cursor: pointer;
+}

@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 import React, {Component} from 'react';
 import {Navbar, NavbarBrand, NavItem, Nav, NavLink} from 'reactstrap';
 import history from '../history';
 import "../css/Header.css";
+=======
+import React from 'react';
+import SignIn from "./SignIn";
+>>>>>>> 0933fe06d7d90e3aa018019d1258b11781e0760e
 
-class Header extends Component {
+const Header = ({isSignedIn, signOut, username}) => {
+  return (
+    <div className='header'>
 
+<<<<<<< HEAD
   isSignedIn() {
     let username = sessionStorage.getItem('user');
     return (username !== '' && username !== null);
@@ -15,56 +23,40 @@ class Header extends Component {
     history.push('/sign-in');
     window.location.reload(false);
   };
+=======
+      <a href={'/home'} style={{textDecoration: 'none', color: 'black'}}>
+        <h1 className='title'>Reddit SQL Clone</h1>
+      </a>
 
-  render() {
+        {isSignedIn() ? (
+          <div style={{marginLeft: '470px', marginRight:'0', marginTop: '30px'}}>
+            <a href={'/profile/' + username} style={{textDecoration: 'none', color: 'black'}}>
+              <h3>{username}</h3>
+            </a>
+          </div>
+        ) : (
+          <div style={{marginLeft: '80px', marginRight:'0', marginTop: '35px'}}>
+            <a href={'/create-account'} style={{ textDecoration: 'none', color: 'black'}}>
+              <h3>Create Account</h3>
+            </a>
+          </div>
+        )}
+>>>>>>> 0933fe06d7d90e3aa018019d1258b11781e0760e
 
-    if(this.isSignedIn()){
-      return(
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href='/home'><h1>Thiem Porter</h1></NavbarBrand>
-          <Nav className='ml-auto' navbar>
-            <NavItem>
-              <NavLink href="/profile">
-                <h4>
-                  Profile
-                </h4>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink onClick={this.signOut}>
-                <h4>
-                  Sign Out
-                </h4>
-              </NavLink>
-            </NavItem>
-          </Nav>
-        </Navbar>
-      );
-    } else {
-      return (
-        <Navbar color="light" light expand="md">
-          <NavbarBrand><h1>Thiem Porter</h1></NavbarBrand>
-          <Nav className='ml-auto' navbar>
-            <NavItem>
-              <NavLink href="/create-account">
-                <h4>
-                  Create Account
-                </h4>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/sign-in">
-                <h4>
-                  Sign In
-                </h4>
-              </NavLink>
-            </NavItem>
-          </Nav>
-        </Navbar>
-      );
-    }
-  }
+      {isSignedIn() ? (
+        <div className='right'>
+          <a onClick={signOut} href={'/home'} style={{textDecoration: 'none', color: 'black'}}>
+            <h3 style={{marginRight:'20px', marginTop: '30px'}}>Sign Out</h3>
+          </a>
+        </div>
+      ) : (
+        <div className='right'>
+          <SignIn />
+        </div>
+      )}
 
-}
+    </div>
+  );
+};
 
 export default Header;

@@ -31,8 +31,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+<<<<<<< HEAD
     "server": "node api/index.js",
     "serverdev": "nodemon api/index.js"
+=======
+    "server": "nodemon api/index.js"
+>>>>>>> 0933fe06d7d90e3aa018019d1258b11781e0760e
   },
   "proxy": "http://localhost:3001/api/hey",
   "eslintConfig": {
