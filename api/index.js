@@ -6,7 +6,6 @@ const authRoutes  = require('./routes/auth.routes');
 const postsRoutes = require('./routes/posts.routes');
 const port        = process.env.port || 3001;
 const bodyParser  = require('body-parser');
-const FileStore   = require('session-file-store')(session)
 
 app.use(cors({
   origin: [
