@@ -29,12 +29,10 @@ app.use(
     resave: false,
     saveUninitialized: false,
     secret: 'jlkahdfbeulbiadb',
-    store: new FileStore(),
-  
     cookie: {
       maxAge: 2 * 60 * 60 * 1000,
       secure: false,
-  }
+    }
 }))
 
 ////   define my routes

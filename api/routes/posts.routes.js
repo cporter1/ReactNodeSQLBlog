@@ -2,6 +2,32 @@ const express = require('express')
 const router  = express.Router(); 
 const DBcalls = require('../tools/sql.requests')
 
+//middleware to ensure session cookie exists and has the correct username
+const isSessionValid = (req,res,next) => {
+    if(res.session && req.session.user) {
+        DBcalls.DBgetSession(req.sessionID)
+            .then(result => {
+                const IDmatch = result.recordset[0]['email'] 
+                                === req.session.user.email
+                if(result && IDmatch) {
+                    next()
+                }
+                else {
+                    req.session.reset()
+                    res.sendStatus(401)
+                }
+
+            })
+            .catch( err => {
+                console.log(err)
+                res.sendStatus(500)
+            })
+    }
+    else {
+        res.sendStatus(401)
+    }
+}
+
 // routes from '/posts/...'
 router
     .post('/newPost', async (req,res) => {
@@ -22,7 +48,7 @@ router
                 res.sendStatus(500)
             })
     })
-    .get('/getPosts', async (req,res) => {
+    .get('/posts', async (req,res) => {
         DBcalls.DBgetPost()
             .then(async result => {
                 res.send(result).status(200)

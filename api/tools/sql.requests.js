@@ -9,7 +9,6 @@ async function DBgetAccount(accEmail) {
     let data = await pool.request().query(DBquery);
     pool.close;
     sql.close;
-    console.log('data: ', data)
     return data;
 }
 
@@ -21,7 +20,6 @@ async function DBcreateAccount(accEmail, accPassword, accName,) {
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    console.log('data: ', data)
     pool.close;
     sql.close;      
     return data;
@@ -34,7 +32,6 @@ async function DBcreatePost(postTitle, postAuthor, postBody, postTime, postID) {
     
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    console.log('data: ', data)
     pool.close;
     sql.close;      
     return data;
@@ -49,7 +46,6 @@ async function DBcreateComment(commentBody, commentAuthor,
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    console.log('data: ', data)
     pool.close;
     sql.close;      
     return data;
@@ -60,7 +56,6 @@ async function DBgetAllPosts() {
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    console.log('data: ', data)
     pool.close;
     sql.close;      
     return data;
@@ -71,7 +66,6 @@ async function DBgetPost(postID) {
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    console.log('data: ', data)
     pool.close;
     sql.close;      
     return data;
@@ -84,7 +78,6 @@ async function DBgetComments(postID) {
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    console.log('data: ', data)
     pool.close;
     sql.close;      
     return data;
@@ -102,12 +95,46 @@ async function DBgetProfile(profileUserName) {
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    console.log('data: ', data)
     pool.close;
     sql.close;      
 
     return data;
 }
+
+async function DBgetSession(sessionID) {
+    let DBquery = `SELECT * FROM Sessions 
+        WHERE sessionID = '${sessionID}'`
+
+    let pool = await sql.connect(DBLogin);
+    let data = await pool.request().query(DBquery);
+    pool.close;
+    sql.close;      
+
+    return data;
+}
+
+async function DBsaveSession(sessionID, email) {
+    let DBquery = `INSERT INTO Sessions VALUES ('${sessionID}', '${email}')`
+
+    let pool = await sql.connect(DBLogin);
+    let data = await pool.request().query(DBquery);
+    pool.close;
+    sql.close;      
+
+    return data;
+}
+
+async function DBdeleteSession(sessionID) {
+    let DBquery = `DELETE FROM Sessions WHERE sessionID = '${sessionID}'`
+
+    let pool = await sql.connect(DBLogin);
+    let data = await pool.request().query(DBquery);
+    pool.close;
+    sql.close;      
+
+    return data;
+}
+
 
 //export the DB call functions
 exports.DBgetAccount    = DBgetAccount;
@@ -117,4 +144,7 @@ exports.DBcreateComment = DBcreateComment;
 exports.DBgetAllPosts   = DBgetAllPosts;
 exports.DBgetPost       = DBgetPost;
 exports.DBgetComments   = DBgetComments;
+exports.DBgetProfile    = DBgetProfile;
+exports.DBgetSession   = DBgetSession;
+exports.DBgetProfile    = DBgetProfile;
 exports.DBgetProfile    = DBgetProfile;
