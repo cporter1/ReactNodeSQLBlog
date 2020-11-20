@@ -30,7 +30,7 @@ const isSessionValid = (req,res,next) => {
 
 // routes from '/posts/...'
 router
-    .post('/newPost', async (req,res) => {
+    .post('/newPost', isSessionValid, async (req,res) => {
         DBcalls.DBcreatePost(req.body.title, req.body.author, req.body.body,
             req.body.timePosted, req.body.postID)
             .then(res.sendStatus(200))
@@ -39,7 +39,7 @@ router
                 res.sendStatus(500)
             })
     })
-    .post('/newComment', async (req,res) => {
+    .post('/newComment', isSessionValid, async (req,res) => {
         DBcalls.DBcreateComment(req.body.body, req.body.author, req.body.timePosted,
             req.body.parentID, req.body.commentID, req.body.postID, req.body.depth)
             .then(res.sendStatus(200))
