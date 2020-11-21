@@ -4,29 +4,28 @@ const DBcalls = require('../tools/sql.requests.js');
 
 //middleware to ensure session cookie exists and has the correct username
 const isSessionValid = (req,res,next) => {
-  if(res.session && req.session.user) {
-    DBcalls.DBgetSession(req.sessionID)
-      .then(result => {
-        const IDmatch = result.recordset[0]['email']
-          === req.session.user.email
-        if(result && IDmatch) {
-          next()
-        }
-        else {
-          req.session.reset()
-          res.sendStatus(401)
-        }
-
-      })
-      .catch( err => {
-        console.log(err)
-        res.sendStatus(500)
-      })
-  }
-  else {
-    res.sendStatus(401)
-  }
+    console.log(req.headers.cookie)
+    try {
+        // if(req.session && req.session.user) {
+        //     console.log('in Session')
+        //     DBcalls.DBgetSession(req.sessionID)
+        //     .then(result => {
+        //         const IDmatch = result['email'] === req.session.user.email
+        //         if(result && IDmatch) {
+        //             next()
+        //         }
+        //         else {
+        //             req.session.reset()
+        //             res.sendStatus(401)
+        //         }
+        //     })
+        //     .catch(err => {console.log(err); res.sendStatus(500)})
+        // }
+        // else {console.log('in else of sessionValid'); res.sendStatus(401)}
+    }
+    catch { console.log('in catch of sessionvalid'); res.sendStatus(401)}
 };
+
 
 // routes from '/posts/...'
 router

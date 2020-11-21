@@ -9,7 +9,7 @@ router
       DBcalls.DBgetAccount(req.body.email)
           .then(async result => {
               if( await bcrypt.compare( req.body.password, result[0]['Password'])) {
-                req.session.user = {'email': result.email};
+                console.log('req.body.sessionID', req.body.sessionID)
 
                 /*DBcalls.DBsaveSession(req.body.sessionID, req.body.email)
                   .then(res.send(result).status(200))
