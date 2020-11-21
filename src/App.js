@@ -7,6 +7,8 @@ import NewPost from "./Pages/NewPost";
 import Profile from "./Pages/Profile";
 import history from './history';
 import './styles/style.css';
+import axios from "axios";
+import {API_Routes} from "./api_routes";
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -21,6 +23,11 @@ class App extends Component {
 
   signOut = () => {
     sessionStorage.removeItem('username');
+    axios.post(`${API_Routes.API_USER_URL}/signOut`).then(response => {
+      console.log(response);
+    }).catch(error => {
+      console.log(error);
+    });
     history.push('/home');
     window.location.reload(false);
   };

@@ -4,6 +4,7 @@ import history from '../history';
 import axios from "axios";
 import "../styles/style.css";
 import {API_Routes} from "../api_routes";
+import Cookies from 'universal-cookie';
 
 class SignIn extends Component {
 
@@ -19,30 +20,27 @@ class SignIn extends Component {
   onSubmit = (ev) => {
     ev.preventDefault();
 
-    let data = JSON.stringify({
+    let data = {
       email: ev.target.email.value,
       password: ev.target.password.value
-    });
+    };
 
-    axios.post(`${API_Routes.API_USER_URL}/signIn`, data, {
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
+    axios.post(`${API_Routes.API_USER_URL}/signIn`, data)
 
-      .then(function (response) {
+      .then( (response) => {
 
         // GOOD LOGIN
         if(response.status === 200){
           sessionStorage.setItem('username', response.data[0]['Username']);
+
           history.push('/home');
           window.location.reload(false);
-        }}  )
-
+        }})
 
       // HANDLE SERVER ERRORS
       .catch(error => {
-        console.log(error.response);
+        console.log("error from frontend: ");
+        console.log(error.response.status);
 
         // ACCOUNT EMAIL NOT FOUND
         if(error.response.status === 404){

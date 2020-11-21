@@ -2,14 +2,11 @@ const sql     = require('mssql');
 const DBLogin = require('../config/db.config.js'); //fetch loginDetails from config/db.config.js
 
 async function DBgetAccount(accEmail) {
-    console.log('reached');
     const DBquery =
       `SELECT * FROM Accounts WHERE Email = '${accEmail}'`;
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    console.log('data recordset from DBgetAccount');
-    console.log(data.recordset);
     pool.close();
     sql.close();
     return data.recordset;
@@ -110,8 +107,8 @@ async function DBgetSession(sessionID) {
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    pool.close;
-    sql.close;
+    pool.close();
+    sql.close();
     return data.recordset;
 }
 

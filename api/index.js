@@ -1,11 +1,12 @@
 const express     = require('express');
-const session     = require('express-session')
+const session     = require('express-session');
 const cors        = require('cors');
 const app         = express(); // create express app
 const authRoutes  = require('./routes/auth.routes'); 
 const postsRoutes = require('./routes/posts.routes');
 const port        = process.env.port || 3001;
 const bodyParser  = require('body-parser');
+const cookieparser = require('cookie-parser')
 
 app.use(cors({
   origin: [
@@ -20,7 +21,6 @@ app.use(express.json()); //allows server to handle json
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const cookieparser = require('cookie-parser')
 app.use(cookieparser())
 
 app.use(

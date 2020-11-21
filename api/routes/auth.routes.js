@@ -11,9 +11,11 @@ router
               if( await bcrypt.compare( req.body.password, result[0]['Password'])) {
                 req.session.user = {'email': result.email};
 
-                DBcalls.DBsaveSession(req.sessionID, req.body.email)
+                /*DBcalls.DBsaveSession(req.body.sessionID, req.body.email)
                   .then(res.send(result).status(200))
-                  .catch(err => {console.log(err); res.sendStatus(500)})
+                  .catch(err => {console.log(err); res.sendStatus(500)})*/
+
+                res.send(result);
               }
               else {
                   res.sendStatus(401)
@@ -34,7 +36,8 @@ router
           res.sendStatus(500)
         })
     })
-    .post('/logOut', async (req,res) => {
+    .post('/signOut', async (req,res) => {
+      console.log(req.body);
       DBcalls.DBdeleteSession(req.sessionID)
         .then(result => {
             res.sendStatus(200)
