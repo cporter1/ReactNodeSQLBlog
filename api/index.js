@@ -1,12 +1,11 @@
 const express     = require('express');
-const session     = require('express-session');
 const cors        = require('cors');
 const app         = express(); // create express app
 const authRoutes  = require('./routes/auth.routes'); 
 const postsRoutes = require('./routes/posts.routes');
 const port        = process.env.port || 3001;
 const bodyParser  = require('body-parser');
-const cookieparser = require('cookie-parser')
+const cookieparser = require('cookie-parser');
 
 app.use(cors({
   origin: [
@@ -22,17 +21,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieparser())
-
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: 'jlkahdfbeulbiadb',
-    cookie: {
-      maxAge: 2 * 60 * 60 * 1000,
-      secure: false,
-  }
-}));
 
 ////   define my routes
 app.use('/users', authRoutes);

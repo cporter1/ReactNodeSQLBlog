@@ -3,6 +3,7 @@ import {Input, Button, Form} from 'reactstrap';
 import axios from "axios";
 import history from "../history";
 import { API_Routes } from '../api_routes';
+import Cookies from 'universal-cookie';
 
 class NewPost extends Component {
 
@@ -36,21 +37,22 @@ class NewPost extends Component {
     title = title.replace(/'/gi, "''");
     body = body.replace(/'/gi, "''");
 
-    let data = JSON.stringify({
+    const cookies = new Cookies();
+
+    let data = {
       title: title,
       author: this.props.username,
       body: body,
       timePosted: timePosted,
       postID: this.getNewCode(),
-    });
+      sessionID: cookies.get('sessionID'),
+      email: cookies.get('email')
+    };
 
-    axios.post(`${API_Routes.API_POST_URL}/newPost`, data, {
-      headers: {
-        'Content-Type': 'application/json',
-      }
+    axios.post(`${API_Routes.API_POST_URL}/newPost`, data
 
       // GET THE RESPONSE FROM THE SERVER
-    }).then(function (response) {
+    ).then(function (response) {
 
       // SUCCESSFUL POST CREATION
       if(response.status === 200){
