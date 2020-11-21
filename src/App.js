@@ -24,14 +24,19 @@ class App extends Component {
 
   signOut = () => {
     sessionStorage.removeItem('username');
-    axios.post(`${API_Routes.API_USER_URL}/signOut`).then(response => {
+    const cookies = new Cookies();
+
+    let data = {
+      sessionID: cookies.get('sessionID')
+    };
+
+    axios.post(`${API_Routes.API_USER_URL}/signOut`, data).then(response => {
       console.log(response);
     }).catch(error => {
       console.log(error);
     });
     history.push('/home');
     window.location.reload(false);
-    const cookies = new Cookies();
     cookies.remove('email', { path: '/', domain: "localhost"});
     cookies.remove('sessionID', { path: '/', domain: "localhost"});
   };

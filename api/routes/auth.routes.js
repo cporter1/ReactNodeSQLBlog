@@ -41,7 +41,7 @@ router
     })
     .post('/signOut', async (req,res) => {
       console.log(req.body);
-      DBcalls.DBdeleteSession(req.sessionID)
+      DBcalls.DBdeleteSession(req.body.sessionID)
         .then(result => {
             res.sendStatus(200)
         })
