@@ -9,6 +9,7 @@ import history from './history';
 import './styles/style.css';
 import axios from "axios";
 import {API_Routes} from "./api_routes";
+import Cookies from 'universal-cookie';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -25,6 +26,9 @@ class App extends Component {
     sessionStorage.removeItem('username');
     axios.post(`${API_Routes.API_USER_URL}/signOut`).then(response => {
       console.log(response);
+      const cookies = new Cookies();
+      cookies.remove('email');
+      cookies.remove('sessionID');
     }).catch(error => {
       console.log(error);
     });

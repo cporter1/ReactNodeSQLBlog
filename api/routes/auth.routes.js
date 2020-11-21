@@ -8,15 +8,19 @@ router
     .post('/signIn', async (req,res) => {
       DBcalls.DBgetAccount(req.body.email)
           .then(async result => {
-              if( await bcrypt.compare( req.body.password, result[0]['Password'])) {
-                req.session.user = {'email': result.email};
 
-                /*DBcalls.DBsaveSession(req.body.sessionID, req.body.email)
+            //CHECK TO SEE IF HASHED PASSWORDS MATCH
+              if( await bcrypt.compare( req.body.password, result[0]['Password'])) {
+                req.session.user = {'email': result[0]['Email']};
+
+                DBcalls.DBsaveSession(req.body.sessionID, req.body.email)
                   .then(res.send(result).status(200))
-                  .catch(err => {console.log(err); res.sendStatus(500)})*/
+                  .catch(err => {console.log(err); res.sendStatus(500)})
 
                 res.send(result);
               }
+
+              //PASSWORDS DO NOT MATCH
               else {
                   res.sendStatus(401)
               }   
