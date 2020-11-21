@@ -17,6 +17,10 @@ class SignIn extends Component {
     };
   }
 
+  getSessionCode = () => {
+    return [...Array(8)].map(i=>(~~(Math.random()*36)).toString(36)).join('');
+  };
+
   onSubmit = (ev) => {
     ev.preventDefault();
 
@@ -43,6 +47,11 @@ class SignIn extends Component {
         // GOOD LOGIN
         if(response.status === 200){
           sessionStorage.setItem('username', response.data[0]['Username']);
+
+          const cookies = new Cookies();
+
+          cookies.set('email', `${email}`, { path: '/' });
+          cookies.set('sessionID', `${this.getSessionCode()}`, { path: '/' });
 
           history.push('/home');
           window.location.reload(false);
