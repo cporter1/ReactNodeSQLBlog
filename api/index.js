@@ -38,7 +38,7 @@ app.use(
 app.use( 
   (req,res,next) => {
     console.log('sessionID: ', req.sessionID)
-    console.log('session user: ', req.session.user)
+    console.log('session user: ', req.session)
     next()
   }
 )
