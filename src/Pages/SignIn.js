@@ -20,6 +20,17 @@ class SignIn extends Component {
   onSubmit = (ev) => {
     ev.preventDefault();
 
+    let email = ev.target.email.value;
+    let password = ev.target.password.value;
+
+    if(email === '' || password === ''){
+      this.setState({
+        error_message: 'Please enter a valid email and password.',
+        error_visible: true,
+      });
+      return;
+    }
+
     let data = {
       email: ev.target.email.value,
       password: ev.target.password.value
