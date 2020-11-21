@@ -10,7 +10,8 @@ const bodyParser  = require('body-parser');
 app.use(cors({
   origin: [
     'http://10.0.0.97:3000',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'http://10.0.0.164:3000'
   ],
   credentials: true,
 }));
@@ -34,15 +35,20 @@ app.use(
   }
 }));
 
+app.use( 
+  (req,res,next) => {
+    console.log('sessionID: ', req.sessionID)
+    console.log('session user: ', req.session.user)
+    next()
+  }
+)
+
 ////   define my routes
-app.use('/users', authRoutes);
-app.use('/posts', postsRoutes);
-// app.use('/sessions', SessRoutes)
+app.use('/users', authRoutes)
+app.use('/posts', postsRoutes)
 
 // start express server on the enviroment port or port 3001
 app.listen(port, err  => {
-  if (err) {
-    return console.log("Error: ", err);
-  }
+  if (err) {return console.log("Error: ", err)}
   console.log("server started on port " + port);
 });

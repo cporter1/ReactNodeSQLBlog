@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Form, Input, Button, Alert} from 'reactstrap';
 import history from '../history';
-import axios from "axios";
+import axios from "../config/axios.config";
 import "../styles/style.css";
 import {API_Routes} from "../api_routes";
 
@@ -28,22 +28,17 @@ class SignIn extends Component {
       headers: {
         'Content-Type': 'application/json',
       }
-    })
-
+      })
       .then(function (response) {
-
         // GOOD LOGIN
         if(response.status === 200){
           sessionStorage.setItem('username', response.data[0]['Username']);
           history.push('/home');
           window.location.reload(false);
         }}  )
-
-
       // HANDLE SERVER ERRORS
       .catch(error => {
-        console.log(error.response);
-
+        console.log(error)
         // ACCOUNT EMAIL NOT FOUND
         if(error.response.status === 404){
           this.setState({
@@ -51,7 +46,6 @@ class SignIn extends Component {
             error_visible: true,
           });
         }
-
         // PASSWORD DOES NOT MATCH
         else if(error.response.status === 401) {
           this.setState({
@@ -59,7 +53,6 @@ class SignIn extends Component {
             error_visible: true,
           });
         }
-
         // SOME OTHER ERROR
         else{
           this.setState({

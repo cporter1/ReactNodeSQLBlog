@@ -76,7 +76,7 @@ class CreateAccount extends Component {
       <div className='create-account'>
         <Form onSubmit={this.onSubmit}>
           <InputGroup>
-            <Input class="w-25" id="email" type='text' placeholder="Email" />
+            <Input className="w-25" id="email" type='text' placeholder="Email" />
           </InputGroup>
           <div style={{height: '0.4em'}}/>
           <InputGroup>

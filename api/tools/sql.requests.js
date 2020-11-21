@@ -8,10 +8,9 @@ async function DBgetAccount(accEmail) {
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);
-    console.log('data recordset from DBgetAccount');
-    console.log(data.recordset);
     pool.close();
     sql.close();
+    console.log(data.recordset)
     return data.recordset;
 }
 
