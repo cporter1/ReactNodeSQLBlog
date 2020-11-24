@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Form, Input, Button, Alert} from 'reactstrap';
 import history from '../history';
-import axios from "axios";
+import axios from "../config/axios.config";
 import "../styles/style.css";
 import {API_Routes} from "../api_routes";
 import Cookies from 'universal-cookie';
@@ -22,10 +22,13 @@ class SignIn extends Component {
   };
 
   onSubmit = (ev) => {
+
+    //TODO BCRYPT THE PASSWORD BEFORE IT IS SENT
     ev.preventDefault();
 
     let email = ev.target.email.value;
     let password = ev.target.password.value;
+    let sessionID = this.getSessionCode();
 
     if(email === '' || password === ''){
       this.setState({
@@ -37,7 +40,8 @@ class SignIn extends Component {
 
     let data = {
       email: ev.target.email.value,
-      password: ev.target.password.value
+      password: ev.target.password.value,
+      sessionID: sessionID,
     };
 
     axios.post(`${API_Routes.API_USER_URL}/signIn`, data)
@@ -48,10 +52,10 @@ class SignIn extends Component {
         if(response.status === 200){
           sessionStorage.setItem('username', response.data[0]['Username']);
 
-          const cookies = new Cookies();
+          // const cookies = new Cookies();
 
-          cookies.set('email', `${email}`, { path: '/' });
-          cookies.set('sessionID', `${this.getSessionCode()}`, { path: '/' });
+          // cookies.set('email', `${email}`, { path: '/' });
+          // cookies.set('sessionID', `${sessionID}`, { path: '/' });
 
           history.push('/home');
           window.location.reload(false);

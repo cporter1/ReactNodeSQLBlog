@@ -7,7 +7,9 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
+    "bcrypt": "^5.0.0",
     "bootstrap": "^4.5.2",
+    "cookie-session": "^1.4.0",
     "history": "^5.0.0",
     "mssql": "^6.2.3",
     "react": "^16.13.1",
@@ -18,8 +20,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "reactstrap": "^8.6.0",
-    "universal-cookie": "^4.0.4",
-    "bcrypt": "latest"
+    "universal-cookie": "^4.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

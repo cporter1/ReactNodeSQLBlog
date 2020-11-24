@@ -112,8 +112,9 @@ async function DBgetSession(sessionID) {
     return data.recordset;
 }
 
-async function DBsaveSession(sessionID, email) {
-    let DBquery = `INSERT INTO Sessions VALUES ('${sessionID}', '${email}')`;
+async function DBsaveSession(sessionID, email, maxAge) {
+    let DBquery = `INSERT INTO Sessions VALUES 
+        ('${sessionID}', '${email}', '${maxAge}')`;
 
     let pool = await sql.connect(DBLogin);
     let data = await pool.request().query(DBquery);

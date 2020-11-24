@@ -3,10 +3,10 @@ const session     = require('express-session');
 const cors        = require('cors');
 const app         = express(); // create express app
 const authRoutes  = require('./routes/auth.routes'); 
-const postsRoutes = require('./routes/posts.routes');
-const port        = process.env.port || 3001;
-const bodyParser  = require('body-parser');
-const cookieparser = require('cookie-parser')
+const postsRoutes   = require('./routes/posts.routes');
+const port          = process.env.port || 3001;
+const bodyParser    = require('body-parser');
+const cookieparser  = require('cookie-parser');
 
 app.use(cors({
   origin: [
@@ -22,23 +22,24 @@ app.use(express.json()); //allows server to handle json
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cookieparser())
+// app.use(cookieparser())
 
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: 'jlkahdfbeulbiadb',
-    cookie: {
-      maxAge: 2 * 60 * 60 * 1000,
-      secure: false,
+app.use(session({
+  name: 'sessionCookie',
+  secret: 'bigShhhh',
+  saveUninitialized: false,
+  resave: false,
+  store: false,
+  cookie: {
+    maxAge: 10 * 60 * 1000,
+    secure: false,
+    httpOnly: true
   }
-}));
+}))
 
 ////   define my routes
 app.use('/users', authRoutes);
 app.use('/posts', postsRoutes);
-// app.use('/sessions', SessRoutes)
 
 // start express server on the enviroment port or port 3001
 app.listen(port, err  => {

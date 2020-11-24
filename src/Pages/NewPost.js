@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Input, Button, Form} from 'reactstrap';
-import axios from "axios";
+import axios from '../config/axios.config';
 import history from "../history";
 import { API_Routes } from '../api_routes';
 
@@ -47,6 +47,7 @@ class NewPost extends Component {
     axios.post(`${API_Routes.API_POST_URL}/newPost`, data, {
       headers: {
         'Content-Type': 'application/json',
+        'sessionCookie' : null,
       }
 
       // GET THE RESPONSE FROM THE SERVER
@@ -60,7 +61,7 @@ class NewPost extends Component {
 
       // ERROR IN POST CREATION
       .catch(error => {
-        if(error.response.status === 400){
+        if(0){
           this.setState({
             error_message: 'Could not create post.',
             error_visible: true,
