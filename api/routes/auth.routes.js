@@ -37,7 +37,6 @@ router
       req.session.destroy()
       req.sessionID = null
       
-      console.log('(/signOut) : ', res)
       DBcalls.DBdeleteSession(ID)
         .then(res.sendStatus(200))
         .catch(err => {console.log(err); res.sendStatus(500)})

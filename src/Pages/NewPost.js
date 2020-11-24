@@ -36,43 +36,41 @@ class NewPost extends Component {
     title = title.replace(/'/gi, "''");
     body = body.replace(/'/gi, "''");
 
-    let data = JSON.stringify({
+    let data = {
       title: title,
       author: this.props.username,
       body: body,
       timePosted: timePosted,
       postID: this.getNewCode(),
-    });
+    };
 
     axios.post(`${API_Routes.API_POST_URL}/newPost`, data, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type'  : 'application/json',
         'sessionCookie' : null,
-      }
-
-      // GET THE RESPONSE FROM THE SERVER
-    }).then(function (response) {
-
+      }}
+    )
+    // GET THE RESPONSE FROM THE SERVER
+    .then( (response) => {
       // SUCCESSFUL POST CREATION
-      if(response.status === 200){
+      if(response.status === 200) {
         history.push('/home');
         window.location.reload(false);
-      }})
-
-      // ERROR IN POST CREATION
-      .catch(error => {
-        if(0){
-          this.setState({
-            error_message: 'Could not create post.',
-            error_visible: true,
-          });
-        }
-
-        else{
-          console.log("ERROR: " + error);
-        }
-      });
-  };
+      }
+    })
+    // ERROR IN POST CREATION
+    .catch(error => {
+      if(0){
+        this.setState({
+          error_message: 'Could not create post.',
+          error_visible: true,
+        })
+      }
+      else{
+        console.log("ERROR: " + error);
+      }
+    })
+  }
 
   render(){
     return(

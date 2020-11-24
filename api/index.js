@@ -1,12 +1,11 @@
 const express     = require('express');
-const session     = require('express-session');
 const cors        = require('cors');
 const app         = express(); // create express app
 const authRoutes  = require('./routes/auth.routes'); 
 const postsRoutes   = require('./routes/posts.routes');
 const port          = process.env.port || 3001;
 const bodyParser    = require('body-parser');
-const cookieparser  = require('cookie-parser');
+const session  = require('express-session');
 
 app.use(cors({
   origin: [
