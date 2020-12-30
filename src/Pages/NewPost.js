@@ -47,7 +47,7 @@ class NewPost extends Component {
     axios.post(`${API_Routes.API_POST_URL}/newPost`, data, {
       headers: {
         'Content-Type'  : 'application/json',
-        'sessionCookie' : null,
+        'sessionCookie' : null
       }}
     )
     // GET THE RESPONSE FROM THE SERVER

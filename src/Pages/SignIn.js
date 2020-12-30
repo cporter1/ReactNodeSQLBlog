@@ -4,7 +4,6 @@ import history from '../history';
 import axios from "../config/axios.config";
 import "../styles/style.css";
 import {API_Routes} from "../api_routes";
-import Cookies from 'universal-cookie';
 
 class SignIn extends Component {
 
@@ -22,8 +21,6 @@ class SignIn extends Component {
   };
 
   onSubmit = (ev) => {
-
-    //TODO BCRYPT THE PASSWORD BEFORE IT IS SENT
     ev.preventDefault();
 
     let email = ev.target.email.value;
@@ -37,30 +34,22 @@ class SignIn extends Component {
       });
       return;
     }
-
     let data = {
       email: ev.target.email.value,
       password: ev.target.password.value,
       sessionID: sessionID,
     };
-
     axios.post(`${API_Routes.API_USER_URL}/signIn`, data)
-
       .then( (response) => {
 
         // GOOD LOGIN
         if(response.status === 200){
           sessionStorage.setItem('username', response.data[0]['Username']);
 
-          // const cookies = new Cookies();
-
-          // cookies.set('email', `${email}`, { path: '/' });
-          // cookies.set('sessionID', `${sessionID}`, { path: '/' });
-
           history.push('/home');
           window.location.reload(false);
-        }})
-
+        }
+      })
       // HANDLE SERVER ERRORS
       .catch(error => {
         console.log("error from frontend: ");
