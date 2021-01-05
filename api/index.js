@@ -11,6 +11,7 @@ const session     = require('express-session');
 app.use(cors({
   origin: [
     'http://192.168.1.66:3000',
+    'http://192.168.1.157:3000',
     'http://10.0.0.97:3000',
     'http://localhost:3000',
     'http://10.0.0.164:3000'
