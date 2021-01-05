@@ -43,6 +43,19 @@ class App extends Component {
     cookies.remove('sessionID', { path: '/', domain: "localhost"});
   };
 
+  componentDidMount() {
+    this.backListener = history.listen(location => {
+      if (location.action === "POP") {
+        window.location.reload(false);
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    // Unbind listener
+    this.backListener();
+  }
+
   render(){
     return (
       <div className='background'>

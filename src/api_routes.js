@@ -1,5 +1,5 @@
-const API_POST_URL = 'http://192.168.1.66:3001/posts';
-const API_USER_URL = 'http://192.168.1.66:3001/users';
+const API_POST_URL = 'http://192.168.1.157:3001/posts';
+const API_USER_URL = 'http://192.168.1.157:3001/users';
 
 export const API_Routes = {
   API_POST_URL,

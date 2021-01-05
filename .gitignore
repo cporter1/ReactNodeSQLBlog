@@ -23,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 api/config/db.config.js
 package-lock.json
+src/api_routes.js
