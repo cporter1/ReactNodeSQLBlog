@@ -6,6 +6,7 @@ import {Label} from "reactstrap";
 import Comment from "./Comment";
 import PostBanner from "./PostBanner";
 import history from "../history";
+import {API_Routes} from "../api_routes";
 
 class Profile extends Component {
 
@@ -35,7 +36,7 @@ class Profile extends Component {
   };
 
   loadData = () => {
-    axios.get(`http://10.0.0.97:3001/profile/${this.props.profile}`).then(response => {
+    axios.get(`${API_Routes.API_POST_URL}/profile/${this.props.profile}`).then(response => {
       console.log(response.data);
       this.setState({
         profileData: response.data,

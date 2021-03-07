@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import '../styles/style.css';
 import {Button, Input, Form} from "reactstrap";
-import axios from "axios";
-import history from "../history";
+import axios from '../config/axios.config';
+import {API_Routes} from "../api_routes";
+import Cookies from 'universal-cookie';
 
 class ReplyBox extends Component {
 
@@ -40,7 +41,10 @@ class ReplyBox extends Component {
     //Replaces all ' with '' for SQL Database Storage
     comment = comment.replace(/'/gi, "''");
 
-    let data = JSON.stringify({
+    //get Cookie Data
+    const cookies = new Cookies();
+
+    let data = {
       body: comment,
       author: this.props.username,
       timePosted: timePosted,
@@ -48,9 +52,11 @@ class ReplyBox extends Component {
       commentID: this.getNewCode(),
       postID: this.props.postID,
       depth: 0,
-    });
+      sessionID: cookies.get('sessionID'),
+      email: cookies.get('email')
+    };
 
-    axios.post('http://10.0.0.97:3001/newComment', data, {
+    axios.post(`${API_Routes.API_POST_URL}/newComment`, data, {
       headers: {
         'Content-Type': 'application/json',
       }

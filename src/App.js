@@ -7,6 +7,9 @@ import NewPost from "./Pages/NewPost";
 import Profile from "./Pages/Profile";
 import history from './history';
 import './styles/style.css';
+import axios from "./config/axios.config";
+import {API_Routes} from "./api_routes";
+import Cookies from 'universal-cookie';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -21,11 +24,37 @@ class App extends Component {
 
   signOut = () => {
     sessionStorage.removeItem('username');
+    const cookies = new Cookies();
+
+    let data = {
+      sessionID: cookies.get('sessionID')
+    };
+
+    axios.post(`${API_Routes.API_USER_URL}/signOut`, data).then(response => {
+      console.log(response);
+      // const cookies = new Cookies();
+      // cookies.remove('sessionID');
+    }).catch(error => {
+      console.log(error);
+    });
     history.push('/home');
     window.location.reload(false);
+    cookies.remove('email', { path: '/', domain: "localhost"});
+    cookies.remove('sessionID', { path: '/', domain: "localhost"});
   };
 
+  componentDidMount() {
+    this.backListener = history.listen(location => {
+      if (location.action === "POP") {
+        window.location.reload(false);
+      }
+    });
+  }
 
+  componentWillUnmount() {
+    // Unbind listener
+    this.backListener();
+  }
 
   render(){
     return (
