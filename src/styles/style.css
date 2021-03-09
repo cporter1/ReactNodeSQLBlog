@@ -3,6 +3,15 @@
     font-family: "Times New Roman", serif !important;
 }
 
+:root {
+    --app-color: #495464;
+    --content-color: #e8e8e8;
+    --header-color: #f4f4f2;
+    --button-color: blue;
+    --hover-color: #495464;
+    --border-color: #373a40;
+}
+
 .center {
     text-align: center;
 }
@@ -10,17 +19,14 @@
 .background {
     width: 100%;
     height: 100%;
-    background: #0e1111;
+    background: #222831;
 }
 
 .header {
-    background: #D3D3D3;
+    background: var(--header-color);
     height: fit-content;
     margin: 0;
     padding: 5px;
-    border-style: solid;
-    border-color: black;
-    border-width: 0 4px 4px 0;
     display: inline-flex;
     width: 100%;
 }
@@ -55,17 +61,14 @@
 }
 
 .app {
-    background: #365090;
-    width: 1200px;
+    background: var(--app-color);
+    width: 100%;
     height: fit-content;
     min-height: 1000px;
     max-width: 100%;
     max-height: 100%;
-    padding: 0 10px 10px;
+    padding: 0;
     margin: 0 auto;
-    border-style: solid;
-    border-color: black;
-    border-width: 0 4px 4px 0;
 }
 
 .sign-in-box {
@@ -82,7 +85,7 @@
 }
 
 .posts {
-    width: 60%;
+    width: 85%;
     display: block;
 }
 
@@ -103,17 +106,13 @@
 }
 
 .post-banner-rect {
-    border-radius: 10px;
-    background: #D3D3D3;
-
+    background: var(--content-color);
+    margin: 0;
     padding: 0 auto;
     width: 100%;
     height: 50px;
     text-align: left;
     display: flex;
-    border-style: solid;
-    border-color: black;
-    border-width: 0 4px 4px 0;
 }
 
 .post-banner-text {
@@ -136,21 +135,17 @@
 
 .view-post-page {
     width: 100%;
-    margin-top: 10px;
+    padding: 10px;
     height: fit-content;
 }
 
 .view-post-body-rect {
-    border-radius: 10px;
-    background: #D3D3D3;
+    background: var(--content-color);
     margin-left: 10px;
     padding: 0 auto;
     width: calc(100% - 10px);
     height: fit-content;
     text-align: left;
-    border-style: solid;
-    border-color: black;
-    border-width: 0 4px 4px 0;
 }
 
 .view-post-body-text {
@@ -165,17 +160,13 @@
 }
 
 .new-post-box {
-    border-radius: 10px;
-    background: #D3D3D3;
+    background: var(--content-color);
     margin-left: 10px;
     padding: 0 auto;
     width: calc(40% - 10px);
     height: fit-content;
     text-align: center;
     display: block;
-    border-style: solid;
-    border-color: black;
-    border-width: 0 4px 4px 0;
 }
 
 .new-post-button-area {
@@ -195,22 +186,19 @@
 .home-content {
     width: 100%;
     height: fit-content;
-    margin-top: 10px;
+    margin-top: 0;
     display: flex;
+    padding: 10px;
 }
 
 .new-post-title-rect {
-    border-radius: 10px;
-    background: #D3D3D3;
+    background: var(--content-color);
     margin-top: 10px;
     padding-bottom: 10px;
     width: 100%;
     height: fit-content;
     text-align: left;
     display: block;
-    border-style: solid;
-    border-color: black;
-    border-width: 0 4px 4px 0;
 }
 
 .new-post-title-text {
@@ -252,6 +240,12 @@
     border-width: 1px;
 }
 
+.border-custom {
+    border-style: solid;
+    border-color: var(--border-color);
+    border-width: 0 0 1px 0;
+}
+
 .page-divider {
     text-align: left;
     background-color: #0e1111;
@@ -259,22 +253,14 @@
     margin-bottom: 10px;
     height: fit-content;
     width: 100%;
-    border-radius: 10px;
-    border-style: solid;
-    border-color: #D3D3D3;
-    border-width: 0 4px 4px 0;
 }
 
 .comment-rect {
-    border-radius: 25px;
-    background: #D3D3D3;
+    background: var(--content-color);
     padding: 0 auto;
     height: fit-content;
     text-align: left;
     display: block;
-    border-style: solid;
-    border-color: black;
-    border-width: 0 4px 4px 0;
 }
 
 .comment-text {
@@ -332,31 +318,31 @@ input[type="password"] {
 }
 
 h3:hover {
-    color: #F5F5F5;
+    color: var(--hover-color);
     cursor: pointer;
 }
 
 h4.link:hover {
-    color: #F5F5F5;
+    color: var(--hover-color);
     cursor: pointer;
 }
 
 h5.link:hover {
-    color: #F5F5F5;
+    color: var(--hover-color);
     cursor: pointer;
 }
 
 h1:hover {
-    color: #F5F5F5;
+    color: var(--hover-color);
     cursor: pointer;
 }
 
 p.title:hover {
-    color: #F5F5F5;
+    color: var(--hover-color);
     cursor: pointer;
 }
 
 p.link-item:hover {
-    color: #F5F5F5;
+    color: var(--hover-color);
     cursor: pointer;
 }
