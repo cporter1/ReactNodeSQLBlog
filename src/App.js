@@ -5,10 +5,10 @@ import Header from "./Pages/Header";
 import Home from "./Pages/Home";
 import NewPost from "./Pages/NewPost";
 import Profile from "./Pages/Profile";
-import history from './history';
+import history from './config/history';
 import './styles/style.css';
 import axios from "./config/axios.config";
-import {API_Routes} from "./api_routes";
+import {API_Routes} from "./config/api_routes";
 import Cookies from 'universal-cookie';
 
 import 'bootstrap/dist/css/bootstrap.css';

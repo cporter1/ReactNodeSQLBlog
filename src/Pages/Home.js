@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Label, Button } from 'reactstrap';
-import history from "../history";
+import history from "../config/history";
 import ViewPost from "./ViewPost";
 import PostBanner from "./PostBanner";
 import NewPostBox from "./NewPostBox";
 import axios from "axios";
-import { API_Routes } from "../api_routes";
+import { API_Routes } from "../config/api_routes";
 import "../styles/style.css";
 
 class Home extends Component {

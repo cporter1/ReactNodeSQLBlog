@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Form, Input, Button, Alert} from 'reactstrap';
-import history from '../history';
+import history from '../config/history';
 import axios from "../config/axios.config";
 import "../styles/style.css";
-import {API_Routes} from "../api_routes";
+import {API_Routes} from "../config/api_routes";
 
 class SignIn extends Component {
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../styles/style.css';
 import {Button, Input, Form} from "reactstrap";
 import axios from '../config/axios.config';
-import {API_Routes} from "../api_routes";
+import {API_Routes} from "../config/api_routes";
 import Cookies from 'universal-cookie';
 
 class CommentBox extends Component {

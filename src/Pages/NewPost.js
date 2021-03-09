@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Input, Button, Form} from 'reactstrap';
 import axios from '../config/axios.config';
-import history from "../history";
-import { API_Routes } from '../api_routes';
+import history from "../config/history";
+import { API_Routes } from '../config/api_routes';
 
 class NewPost extends Component {
 

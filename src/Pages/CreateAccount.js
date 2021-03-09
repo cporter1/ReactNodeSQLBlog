@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Form, Input, InputGroup, Button, Alert} from 'reactstrap';
 import axios from 'axios';
-import history from "../history";
-import { API_Routes } from '../api_routes';
+import history from "../config/history";
+import { API_Routes } from '../config/api_routes';
 
 class CreateAccount extends Component {
 

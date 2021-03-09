@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import "../styles/style.css";
-import '../history';
+import '../config/history';
 import {Label} from "reactstrap";
 import Comment from "./Comment";
 import PostBanner from "./PostBanner";
-import history from "../history";
-import {API_Routes} from "../api_routes";
+import history from "../config/history";
+import {API_Routes} from "../config/api_routes";
 
 class Profile extends Component {
 

@@ -3,8 +3,8 @@ import axios from '../config/axios.config';
 import {Label} from "reactstrap";
 import Comment from './Comment';
 import CommentBox from './CommentBox';
-import history from "../history";
-import {API_Routes} from "../api_routes";
+import history from "../config/history";
+import {API_Routes} from "../config/api_routes";
 import Cookies from "universal-cookie";
 
 class ViewPost extends Component {
