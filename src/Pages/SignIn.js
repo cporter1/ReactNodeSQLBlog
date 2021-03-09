@@ -91,17 +91,15 @@ class SignIn extends Component {
   render(){
 
     return(
-      <div>
-        <Form onSubmit={this.onSubmit} style={{textAlign: 'right'}}>
-          <div className='sign-in-box'>
-          <Input className='small-input' size='sm' id="email" type='text' placeholder="Email" />
-          <div style={{width: '1em'}}/>
-          <Input className='small-input' size='sm' id="password" type="password" placeholder="Password" />
+      <div className='sign-in-box'>
+        <Form onSubmit={this.onSubmit} style={{display: 'inline-flex', maxWidth: '280px'}}>
+          <Input className='small-input' size='sm' id="email" type='text' placeholder="Email" style={{maxWidth: '33%'}}/>
+          <div style={{width: '5px'}}/>
+          <Input className='small-input' size='sm' id="password" type="password" placeholder="Password" style={{maxWidth: '33%'}}/>
           <Alert color="danger" isOpen={this.state.error_visible} toggle={this.onDismiss}>
             {this.state.error_message}
           </Alert>
-          </div>
-          <Button style={{marginRight: '10px', color: 'white', backgroundColor: '#365090', borderRadius: '6px', borderColor: 'black', borderStyle: 'solid', borderWidth: '0 2px 2px 0'}}>Sign In</Button>
+          <Button style={{padding: '5px 10px 5px 10px', marginLeft: '5px', color: 'white', backgroundColor: '#365090', maxWidth: '33%'}}>Sign In</Button>
         </Form>
       </div>
     );

@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: "Times New Roman", serif !important;
 }
 
 .center {
@@ -16,16 +17,41 @@
     background: #D3D3D3;
     height: fit-content;
     margin: 0;
-    padding: 10px 10px 20px 10px;
+    padding: 5px;
     border-style: solid;
     border-color: black;
     border-width: 0 4px 4px 0;
-    border-radius: 10px;
-    display: flex;
+    display: inline-flex;
+    width: 100%;
 }
 
-.header_right {
-    border-right: 120px solid #D3D3D3;
+.header-area {
+    height: fit-content;
+    width: 100%;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    cursor: pointer;
+}
+
+.link-item {
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.title-box {
+    height: fit-content;
+    width: 50%;
+    display: inline-flex;
+    justify-content: flex-start;
+    margin: 0 0 5px 10px;
 }
 
 .app {
@@ -35,7 +61,7 @@
     min-height: 1000px;
     max-width: 100%;
     max-height: 100%;
-    padding: 10px;
+    padding: 0 10px 10px;
     margin: 0 auto;
     border-style: solid;
     border-color: black;
@@ -43,12 +69,11 @@
 }
 
 .sign-in-box {
-    margin: 10px;
-    border-style: solid;
-    border-color: black;
-    border-width: 0 4px 4px 0;
-    border-radius: 10px;
     display: flex;
+    height: fit-content;
+    width: fit-content;
+    margin: 10px;
+    max-width: 50%;
 }
 
 .profile {
@@ -69,13 +94,6 @@
     font-size: 5px;
     background-color: #365090;
     padding: 2px 5px;
-}
-
-.title {
-    font-size: 3rem;
-    font-weight: bold;
-    margin: 15px 10px 10px 25px;
-    cursor: pointer;
 }
 
 .create-account {
@@ -329,6 +347,16 @@ h5.link:hover {
 }
 
 h1:hover {
+    color: #F5F5F5;
+    cursor: pointer;
+}
+
+p.title:hover {
+    color: #F5F5F5;
+    cursor: pointer;
+}
+
+p.link-item:hover {
     color: #F5F5F5;
     cursor: pointer;
 }
