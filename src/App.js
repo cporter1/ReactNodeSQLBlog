@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import {Router, Switch, Route} from "react-router-dom";
-import CreateAccount from "./Pages/CreateAccount";
-import Header from "./Pages/Header";
-import Home from "./Pages/Home";
-import NewPost from "./Pages/NewPost";
-import Profile from "./Pages/Profile";
+import CreateAccount from "./pages/CreateAccount";
+import Header from "./pages/Header";
+import Home from "./pages/Home";
+import NewPost from "./pages/NewPost";
+import Profile from "./pages/Profile";
 import history from './config/history';
 import './styles/style.css';
 import axios from "./config/axios.config";

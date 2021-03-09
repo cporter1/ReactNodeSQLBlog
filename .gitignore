@@ -25,3 +25,4 @@ yarn-error.log*
 backend/config/db.config.js
 package-lock.json
 src/config/api_routes.js
+src/config/axios.config.js
