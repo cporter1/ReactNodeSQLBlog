@@ -12,7 +12,7 @@ router.post('/signIn', async (req,res) => {
             //CHECK TO SEE IF HASHED PASSWORDS MATCH
               if( await bcrypt.compare( req.body.password, result[0]['Password'])) {
                 req.session.email = req.body.email
-                console.log(req.session)
+                //console.log(req.session)
                 DBcalls.DBsaveSession(req.sessionID, req.body.email, Date.now() + (1000*60*10))
                   .then(res.send(result).status(200))
                   .catch(err => {console.log(err); res.sendStatus(500)})

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import axios from "axios";
+import axios from '../config/axios.config';
 import {Label} from "reactstrap";
 import Comment from './Comment';
-import ReplyBox from './ReplyBox';
+import CommentBox from './CommentBox';
 import history from "../history";
 import {API_Routes} from "../api_routes";
+import Cookies from "universal-cookie";
 
 class ViewPost extends Component {
 
@@ -99,7 +100,10 @@ class ViewPost extends Component {
     //Replaces all ' with '' for SQL Database Storage
     reply = reply.replace(/'/gi, "''");
 
-    let data = JSON.stringify({
+    //get Cookie Data
+    const cookies = new Cookies();
+
+    let data = {
       body: reply,
       author: this.props.username,
       timePosted: timePosted,
@@ -107,7 +111,7 @@ class ViewPost extends Component {
       commentID: this.getCommentCode(),
       postID: this.props.postID,
       depth: this.getDepthFromIndex(this.state.openComment) + 1,
-    });
+    };
 
     axios.post(`${API_Routes.API_POST_URL}/newComment`, data, {
       headers: {
@@ -116,11 +120,9 @@ class ViewPost extends Component {
 
       // GET THE RESPONSE FROM THE SERVER
     }).then(function (response) {
-
-      // SUCCESSFUL POST CREATION
-      if(response.status === 200){
-        window.location.reload(false);
-      }})
+        if(response.status === 200){
+          window.location.reload(false);
+        }})
 
     // ERROR IN POST CREATION
       .catch(error => {
@@ -132,7 +134,7 @@ class ViewPost extends Component {
         }
 
         else{
-          console.log("ERROR: " + error);
+          console.log("ERROR from View Post! Could not create reply: " + error);
         }
       });
   };
@@ -205,7 +207,7 @@ class ViewPost extends Component {
               }
             </div>
 
-            <ReplyBox postID={this.state.post[0]['PostID']} username={this.props.username}/>
+            <CommentBox postID={this.state.post[0]['PostID']} username={this.props.username}/>
 
           </div>
 

@@ -5,7 +5,7 @@ import axios from '../config/axios.config';
 import {API_Routes} from "../api_routes";
 import Cookies from 'universal-cookie';
 
-class ReplyBox extends Component {
+class CommentBox extends Component {
 
   constructor(props){
     super(props);
@@ -52,8 +52,6 @@ class ReplyBox extends Component {
       commentID: this.getNewCode(),
       postID: this.props.postID,
       depth: 0,
-      sessionID: cookies.get('sessionID'),
-      email: cookies.get('email')
     };
 
     axios.post(`${API_Routes.API_POST_URL}/newComment`, data, {
@@ -113,4 +111,4 @@ class ReplyBox extends Component {
   }
 }
 
-export default ReplyBox;
+export default CommentBox;
