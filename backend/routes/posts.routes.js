@@ -22,11 +22,11 @@ const isSessionValid = (req,res,next) => {
                     res.sendStatus(401)
                 }
             })
-            .catch(err => {console.log(err); res.sendStatus(500)})
+            .catch(err => {console.log('error 1'); console.log(err); res.sendStatus(500)})
         }
-        else {res.sendStatus(401)}
+        else {console.log('error 2'); res.sendStatus(401)}
     }
-    catch {res.sendStatus(401)}
+    catch {console.log('error 3'); res.sendStatus(401)}
 };
 
 // routes from '/posts/...'
@@ -49,6 +49,13 @@ router // for making a new post
                 res.send(result).status(200)
             })
             .catch(err => {console.log(err);res.sendStatus(500)})
+    })
+    .get('/getUpvoted/:username', async (req,res) => {
+        DBcalls.DBgetUpvoted(req.params['username'])
+        .then(async result => {
+            res.send(result).status(200)
+        })
+        .catch(err => {console.log(err);res.sendStatus(500)})
     }) // get post by ID
     .get('/post/:postID', async (req,res) => {
         DBcalls.DBgetPost(req.params['postID'])
@@ -71,5 +78,19 @@ router // for making a new post
             })
             .catch(err => {console.log(err);res.sendStatus(500)})
     })
+    .post('/upvote', async (req,res) => {
+        DBcalls.DBUpvote(req.body.id, req.body.username)
+          .then(async result => {
+              res.send(result).status(200)
+          })
+          .catch(err => {console.log(err);res.sendStatus(500)})
+    })
+    .post('/downvote', async (req,res) => {
+      DBcalls.DBDownvote(req.body.id, req.body.username)
+        .then(async result => {
+            res.send(result).status(200)
+        })
+        .catch(err => {console.log(err);res.sendStatus(500)})
+  })
     
 module.exports = router;

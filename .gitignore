@@ -12,6 +12,11 @@
 # production
 /build
 
+#config
+backend/config/db.config.js
+src/config/api_routes.js
+src/config/axios.config.js
+
 # misc
 .DS_Store
 .env.local
@@ -22,7 +27,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-backend/config/db.config.js
 package-lock.json
-src/config/api_routes.js
-src/config/axios.config.js
