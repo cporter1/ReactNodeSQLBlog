@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from "axios";
+import axios from '../config/axios.config';
 import "../styles/style.css";
 import '../config/history';
 import {Label} from "reactstrap";

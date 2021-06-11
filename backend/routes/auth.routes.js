@@ -9,6 +9,8 @@ router.post('/signIn', async (req,res) => {
       DBcalls.DBgetAccount(req.body.email)
           .then(async result => {
 
+            console.log(result);
+
             //CHECK TO SEE IF HASHED PASSWORDS MATCH
               if( await bcrypt.compare( req.body.password, result[0]['Password'])) {
                 req.session.email = req.body.email

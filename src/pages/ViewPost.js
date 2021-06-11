@@ -6,6 +6,7 @@ import CommentBox from './CommentBox';
 import history from "../config/history";
 import {API_Routes} from "../config/api_routes";
 import Cookies from "universal-cookie";
+import PostBanner from "./PostBanner";
 
 class ViewPost extends Component {
 
@@ -48,6 +49,16 @@ class ViewPost extends Component {
     }).catch(error => {
       console.log(error);
     });
+  };
+
+  goToPost = () => {
+    history.push(`/post/${this.state.post[0]['PostID']}`);
+    window.location.reload(false);
+  };
+
+  goToAuthor = () => {
+    history.push(`/profile/${this.state.post[0]['Author']}`);
+    window.location.reload(false);
   };
 
   getComments = () => {
@@ -186,14 +197,8 @@ class ViewPost extends Component {
         <div className='view-post-page'>
           <div className='view-post-top-content'>
             <div className='view-post-rect'>
-              <div className='post-banner-rect'>
-                <div className='post-banner-text'>
-                  <h4 style={{cursor: 'default'}}>{this.state.post[0]['Title']}</h4>
-                  <div className='right'>
-                    <h4 onClick={this.goToPostAuthor} className='link'>{this.state.post[0]['Author']}</h4>
-                  </div>
-                </div>
-              </div>
+
+              <PostBanner post={this.state.post[0]}/>
 
               {this.state.bodyExists
                 ?

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Form, Input, InputGroup, Button, Alert} from 'reactstrap';
-import axios from 'axios';
+import axios from '../config/axios.config';
 import history from "../config/history";
 import { API_Routes } from '../config/api_routes';
 

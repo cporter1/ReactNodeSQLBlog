@@ -346,3 +346,7 @@ p.link-item:hover {
     color: var(--hover-color);
     cursor: pointer;
 }
+
+img.upvote:hover {
+    cursor: pointer;
+}

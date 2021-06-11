@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Label, Button } from 'reactstrap';
+import { Label } from 'reactstrap';
 import history from "../config/history";
 import ViewPost from "./ViewPost";
 import PostBanner from "./PostBanner";
 import NewPostBox from "./NewPostBox";
-import axios from "axios";
+import axios from "../config/axios.config";
 import { API_Routes } from "../config/api_routes";
 import "../styles/style.css";
 
@@ -14,6 +14,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
+
       posts: [],
       upvoted: [],
       saved_upvotes: [],
@@ -64,10 +65,23 @@ class Home extends Component {
   };
 
   onUpvote = (index) => {
+    //switch the upvote status when the button is clicked
     let ar = this.state.upvoted;
     ar[index] = !ar[index];
+
     let ar2 = this.state.posts;
-    ar2[index]['Upvotes'] = ar2[index]['Upvotes'] + 1;
+    let downvote = false;
+    if(ar[index] === false){
+      //Upvote has been removed
+      //we should remove an upvote from the backend
+      ar2[index]['Upvotes'] = ar2[index]['Upvotes'] - 1;
+      downvote = true;
+    } else {
+      //Post has been upvoted normally, continue
+      ar2[index]['Upvotes'] = ar2[index]['Upvotes'] + 1;
+    }
+
+    //Update the frontend
     this.setState({
       upvoted: ar,
       posts: ar2,
@@ -79,19 +93,40 @@ class Home extends Component {
       username: this.props.username,
     };
 
-    axios.post(`${API_Routes.API_POST_URL}/upvote`, data, {
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    }).then(function (response) {
+    if(downvote){
 
-      if(response.status === 200){
-        //window.location.reload(false);
+      axios.post(`${API_Routes.API_POST_URL}/downvote`, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }).then(function (response) {
 
-    }}).catch(error => {
-          console.log("ERROR from View Post! Could not upvote: " + error);
+        if(response.status === 200){
+
+        }}).catch(error => {
+          console.log("ERROR from Home! Could not downvote: " + error);
         }
       );
+
+
+      // If it is an upvote
+    } else {
+
+      axios.post(`${API_Routes.API_POST_URL}/upvote`, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }).then(function (response) {
+
+        if(response.status === 200){
+          //window.location.reload(false);
+
+        }}).catch(error => {
+          console.log("ERROR from Home! Could not upvote: " + error);
+        }
+      );
+    }
+
   };
 
   getUpvoted = () => {
@@ -142,15 +177,7 @@ class Home extends Component {
             <div className='posts'>
               {this.state.posts.map((key, index) => {
                 return (
-                  <PostBanner key={index} title={this.state.posts[index]['Title']}
-                              author={this.state.posts[index]['Author']}
-                              index={index}
-                              goToPost={this.goToPost}
-                              goToAuthor={this.goToAuthor}
-                              upvotes={this.state.posts[index]['Upvotes']}
-                              onUpvote={this.onUpvote}
-                              isUpvoted={this.state.upvoted[index]}
-                  />
+                  <PostBanner key={index} post={this.state.posts[index]}/>
                 );
               })}
             </div>

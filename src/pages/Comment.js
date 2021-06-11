@@ -3,6 +3,7 @@ import '../styles/style.css'
 import {Button, Form, Input} from "reactstrap";
 
 const Comment = ({i, commentIsOpen, body, author, goToAuthor, timePosted, offset, openReply, submitReply, loadReply}) => {
+
   return (
     <div className='comment-rect border-custom' style={{marginLeft: offset * 20 + 'px'}}>
       <div className='comment-text'>

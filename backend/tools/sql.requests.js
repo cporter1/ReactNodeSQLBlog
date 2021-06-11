@@ -157,11 +157,14 @@ async function DBUpvote(id, username) {
     sql.close();
 }
 
-async function DBDownvote(id) {
+async function DBDownvote(id, username) {
     let DBquery = `UPDATE Posts SET Upvotes = Upvotes - 1 WHERE PostID = '${id}'`;
 
     let pool = await sql.connect(DBLogin);
     await pool.request().query(DBquery);
+
+    let query2 = `DELETE FROM Upvotes where ${username} = '${id}';`;
+    await pool.request().query(query2);
     pool.close();
     sql.close();
 }
